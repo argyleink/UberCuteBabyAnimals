@@ -1,0 +1,23 @@
+﻿.win-semanticzoom {
+    height:100%;
+}
+
+.hometile {
+    height:500px;
+    width:500px;
+
+    background-size:cover;
+}
+
+    .homelist .win-viewport {
+        padding-left:120px;
+        box-sizing:border-box;
+    }
+
+@media screen and (-ms-view-state: snapped) {
+    
+}
+
+@media screen and (-ms-view-state: fullscreen-portrait) {
+    
+}

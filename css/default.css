@@ -1,0 +1,353 @@
+﻿/*
+    hsl(213, 92%, 85%)
+    #B3D4FC    
+*/
+
+* {
+    position:relative;
+}
+
+figure {
+    margin:0;
+    padding:0;
+}
+
+#contenthost {
+    height: 100%;
+    width: 100%;
+}
+
+section[role=main] {
+    box-sizing:border-box;
+}
+
+.win-backdrop {
+    background-image:none !important;
+}
+
+.fragment {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 128px 1fr;
+    display: -ms-grid;
+
+    height: 100%;
+    width: 100%;
+}
+
+    .fragment header[role=banner] {
+        /* Define a grid with columns for the back button and page title. */
+        -ms-grid-columns: 120px 1fr;
+        -ms-grid-rows: 1fr;
+        display: -ms-grid;
+    }
+
+        .fragment header[role=banner] .win-backbutton {
+            margin-left: 39px;
+            margin-top: 46px;
+        }
+
+        .fragment header[role=banner] .titlearea {
+            -ms-grid-column: 2;
+            margin-top: 25px;
+            position:absolute;
+            z-index:100;
+            width:100%;
+        }
+
+            .fragment header[role=banner] .titlearea .pagetitle {
+                width: calc(100% - 20px);
+            }
+
+    .fragment section[role=main] {
+        -ms-grid-row: 2;
+        height: 100%;
+        width: 100%;
+        color:#555;
+        background-color:white;
+    }
+
+.pagetitle {
+    color:#555;
+    text-shadow:0 -1px 0 white;
+}
+
+    .pagetitle > img {
+        height:80px;
+    }
+
+#splashBackground {
+    width:100%;
+    height:100%;
+    z-index:5;
+
+    background-color:#eee;
+}
+
+#splashBackground, #extended-splash-image, #statusview, #network-status, #message {
+    position: absolute;
+}
+
+#progress-status {
+    position:absolute;
+}
+
+#statusview {
+    height:100%;
+    width:100%;
+    z-index:100;
+    top:0;
+    display:none !important;
+}
+
+#progress-status {
+    height:10px;
+    width:100%;
+    z-index:100;
+    bottom:10px;
+    z-index:100;
+}
+
+    #progress-status.out {
+        display:none;
+    }
+
+#loading-status {
+    height:10px;
+    width:100%;
+    z-index:100;
+    bottom:5px;
+    display:none;
+}
+
+    #loading-status progress {
+        color:#B3D4FC;
+    }
+
+#network-status {
+    padding:10px;
+    background-color:white;
+    border:2px solid #ccc;
+    margin-left:10px;
+}
+
+.none {
+    display:none;
+}
+
+
+
+
+/* global settings flyout styles */
+.settingsFlyout > .win-label {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.settingsFlyout > .win-label > span {
+    margin-left: 40px;
+}
+
+.settingsFlyout section[role=main] {
+    padding-left: 20px;
+}
+/* end global settings flyout styles */
+
+/* start native element custom skin selectors */
+
+/* custom scroll colors for touch only, looks better that way */
+body.touch {
+    -ms-scrollbar-base-color:#B3D4FC; 
+}
+
+a, a:visited {
+    color:hsl(213, 92%, 85%);
+    cursor:pointer;
+}
+
+    a:hover, a:active {
+        color:hsl(213, 92%, 75%);
+    }
+
+/* custom back and appbar buttons */
+.win-backbutton,
+.win-commandring
+{
+    border-color:hsl(213, 92%, 75%) !important;
+    color:hsl(213, 92%, 75%) !important;
+}
+
+.win-label {
+    color:hsl(213, 92%, 70%);
+    font-size:1.2rem;
+}
+
+/* inner appbar icon color */
+.win-commandlayout.win-appbar,
+.win-top.win-appbar {
+    background-color:hsl(213, 92%, 93%);
+    box-sizing:content-box;
+    /*border-right: 3px solid #B3D4FC;*/
+}
+.win-commandlayout.win-appbar {
+    border-top: 3px solid hsl(213, 92%, 90%);
+}
+.win-top.win-appbar {
+    border-bottom: 3px solid hsl(213, 92%, 90%);
+    background-color:hsla(213, 92%, 93%, 0.8);
+    height:250px;
+}
+
+.win-commandimage {
+    color:hsl(213, 92%, 75%) !important;
+}
+
+    .win-backbutton:hover {
+        background-color:hsl(213, 92%, 80%) !important;
+        color:hsl(213, 92%, 95%) !important;
+
+        transition:all 0.1s ease-out;
+        transform:scale3d(1.1,1.1,1.1);
+    }
+
+    .win-backbutton:active {
+        border-color:hsl(213, 92%, 75%) !important;
+        color:hsl(213, 92%, 95%) !important;
+        
+        transition:all 0.1s ease-out;
+        transform:scale3d(0.9,0.9,0.9);
+    }
+
+button:active .win-commandring,
+button:hover .win-commandring {
+    background-color:hsl(213, 92%, 75%) !important;
+}
+
+button:active .win-commandimage,
+button:hover .win-commandimage {
+    color:white !important;
+}
+
+/* spinners / loaders */
+progress {
+    width:100%;
+}
+
+progress.win-ring {
+    /* set size of spinner */
+    width:60px;
+    height:60px;
+}
+
+progress:indeterminate {
+    color: #555; 
+}
+
+#itemFlipview.win-flipview .win-navbutton {
+    background-color:#EEE;
+    color:#888;
+}
+
+
+#itemFlipview.win-flipview .win-navbutton:active,
+#itemFlipview.win-flipview .win-navbutton:hover {
+    background-color:#CCC;
+}
+
+/* star rating native component */
+.win-rating .win-empty.win-star {
+    color:#B3D4FC;
+    opacity:0.5;
+    transition:opacity 0.2s ease-in;
+}
+
+.win-rating .win-full.win-user.win-star, 
+.win-rating .win-disabled.win-full.win-user.win-star,
+.win-rating .win-star.win-tentative.win-full {
+    opacity:1;
+    color:#B3D4FC;
+}
+/* end star rating skinning */
+
+/* listview styles */
+.win-listview .win-container:hover {
+    background-color: #B3D4FC; /* set opacity to 0 on rgba to remove hover effects */
+    outline: #B3D4FC solid 3px;
+}
+
+/* tickle / right click listview item select colors */
+::selection,
+.win-selectionborder {
+    border-color:#B3D4FC !important;
+}
+
+.win-focusedoutline  {
+    outline-color:#B3D4FC !important;
+}
+
+.win-selectioncheckmarkbackground,
+.win-container:hover .win-selectioncheckmarkbackground {
+    border-top-color:#B3D4FC !important;
+    border-right-color:#B3D4FC !important;
+}
+
+.win-selectioncheckmark {
+    color:white;
+}
+.win-selectionhint {
+    color:#B3D4FC !important;
+}
+.win-tooltip,
+.win-flyout {
+    outline-color:#B3D4FC;
+    border-color:#B3D4FC;
+}
+/* end listview styles */
+
+/* range slider styles */
+input[type=range]::-ms-fill-lower {
+    background-color: #B3D4FC;
+}
+input[type=range]:hover::-ms-fill-lower {
+    background-color: #B3D4FC;
+}
+input[type=range]:active::-ms-fill-lower {
+    background-color: #B3D4FC;
+}
+input[type=range]:disabled::-ms-fill-lower {
+    background-color: #B3D4FC;
+}
+
+/* end native element custom skin selectors */
+
+@media screen and (-ms-view-state: snapped) {
+    .fragment header[role=banner] {
+        -ms-grid-columns: auto 1fr;
+        margin-left: 20px;
+    }
+
+        .fragment header[role=banner] .win-backbutton {
+            margin: 0;
+            margin-right: 10px;
+            margin-top: 76px;
+        }
+
+            .fragment header[role=banner] .win-backbutton:disabled {
+                display: none;
+            }
+
+        .fragment header[role=banner] .titlearea {
+            -ms-grid-column: 2;
+            margin-left: 0;
+            margin-top: 68px;
+        }
+}
+
+@media screen and (-ms-view-state: fullscreen-portrait) {
+    .fragment header[role=banner] {
+        -ms-grid-columns: 100px 1fr;
+    }
+
+        .fragment header[role=banner] .win-backbutton {
+            margin-left: 29px;
+        }
+}

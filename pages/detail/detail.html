@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Detail</title>
+
+    <script src="detail.js"></script>
+</head>
+<body>
+    
+    <div id="detail_top_appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement:'top', layout: 'custom'}">
+        <header aria-label="Navigation bar" role="banner">
+            <button id="cmdBack" class="win-backbutton" aria-label="Back"></button>
+        </header>
+    </div> 
+
+    <div class="itemdetailpage fragment">
+        <div class="content" aria-label="Main content" role="main">
+            <div id="detail_flipview" data-win-control="WinJS.UI.FlipView"></div>
+        </div>
+    </div>
+
+    <div id="detail_appbar" data-win-control="WinJS.UI.AppBar">
+        <button data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'save', label:'Save Image', icon:'save'}" type="button">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'prev', label:'Previous', icon:'previous'}" type="button">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'next', label:'Next', icon:'next'}" type="button">
+        </button>
+    </div> 
+</body>
+</html>
