@@ -25,7 +25,9 @@
     // This function returns a WinJS.Binding.List containing only the items
     // that belong to the provided group.
     function getItemsFromGroup(slug) {
-        return babyList.createFiltered(function (item) { return item.category.slug === slug; });
+        return babyList.createFiltered(function (item) {
+            return item.categories[0].slug === slug;
+        });
     }
 
     // Get the unique group corresponding to the provided group key.
@@ -42,8 +44,17 @@
     function resolveItemReference(reference) {
         for (var i = 0; i < babyGroupedList.length; i++) {
             var item = babyGroupedList.getAt(i);
-            if (item.categories[0].slug === reference[0] && item.title === reference[1]) {
+            if (item.id === reference.id) {
                 return item;
+            }
+        }
+    }
+
+    function getItemIndex(reference) {
+        for (var i = 0; i < babyGroupedList.length; i++) {
+            var item = babyGroupedList.getAt(i);
+            if (item.id === reference.id) {
+                return i;
             }
         }
     }
@@ -75,6 +86,7 @@
         items: babyGroupedList,
         getItemReference: getItemReference,
         getItemsFromGroup: getItemsFromGroup,
+        getItemIndex: getItemIndex,
         resolveGroupReference: resolveGroupReference,
         resolveItemReference: resolveItemReference,
         getWordpressJSON: getWordpressJSON

@@ -85,9 +85,8 @@
                 header.appendChild(title);
 
                 header.onclick = function (event) {
-                    //Application.navigator.pageControl.navigateToGroup(event.srcElement.groupKey)
-                    console.info(event);
-                }.bind(this);
+                    Application.navigator.pageControl.navigateToGroup(this.key);
+                }.bind(item);
 
                 return header;
             });
@@ -142,10 +141,8 @@
             }
         },
 
-        // Navigates to the groupHeaderPage. Called from the groupHeaders,
-        // keyboard shortcut and iteminvoked.
         navigateToGroup: function (key) {
-            nav.navigate("/pages/groups/groups.html", { groupKey: key });
+            nav.navigate("/pages/collection/collection.html", { groupKey: key });
         }
 
     });
