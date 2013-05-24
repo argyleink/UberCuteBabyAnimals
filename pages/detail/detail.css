@@ -1,5 +1,5 @@
-﻿.win-flipview {
-    height:700px;
+﻿#detail_flipview {
+    height:100%;
 }
 
 @media screen and (-ms-view-state: snapped) {

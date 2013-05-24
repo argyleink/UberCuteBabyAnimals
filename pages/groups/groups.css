@@ -2,11 +2,36 @@
     height:100%;
 }
 
+.vertical-rule {
+    border-left:1px solid #aaa;
+    width:1px;
+    height:100%;
+}
+
+#filter_list {
+    display:-ms-flexbox;
+    -ms-flex-wrap:nowrap;
+    margin:0;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+
+#filter_list > dt {
+    font-size:2em;
+    font-weight:lighter;
+    cursor:pointer;
+
+    display:inline-block;
+    padding:1rem 2rem;
+}
+
 .hometile {
     height:500px;
     width:500px;
 
     background-size:cover;
+    background-position:center center;
 }
 
     .homelist .win-viewport {

@@ -57,8 +57,27 @@
             grouplist.oniteminvoked = this._itemInvoked.bind(this);
 
             groupsezo = group_sezo.winControl;
-
+            
+            this.populateHeader();
             this.updateLayout();
+        },
+
+        populateHeader: function() {
+            var cats = Data.categories()
+              , pool = document.createDocumentFragment();
+
+            for (var i = 0, l = cats.length; i < l; i++) {
+                var cat = document.createElement('dt');
+                cat.textContent = cats[i];
+                //cat.style.backgroundColor = 'hsl(213, 92%, '+ (85 + i) +'%)';
+                pool.appendChild(cat);
+            }
+
+            filter_list.appendChild(pool);
+
+            filter_list.addEventListener('click', function (e) {
+                this.navigateToGroup(e.srcElement.textContent);
+            }.bind(this));
         },
 
         itemRenderer: function(itemPromise) {

@@ -2,7 +2,8 @@
     "use strict";
 
     var babyList = new WinJS.Binding.List()
-      , babyGroupedList;
+      , babyGroupedList
+      , categories = [];
 
     babyGroupedList = babyList.createGrouped(
         function groupKeySelector(item) {
@@ -15,6 +16,10 @@
             return leftKey.charCodeAt(0) - rightKey.charCodeAt(0);
         }
     );
+
+    function getCategories() {
+        return categories;
+    }
 
     // Get a reference for an item, using the group key and item title as a
     // unique reference to the item that can be easily serialized.
@@ -63,17 +68,23 @@
         return babyList.indexOf(item) > 0 ? true : false;
     }
 
+    function categoryContains(item) {
+        var i = categories.length;
+        while (i--)
+            if (categories[i] === item) return true;
+        return false;
+    }
+
     function getWordpressJSON() {
         return new WinJS.xhr({ url: "http://dork.local/ubercute/?json=1" });
     }
 
-    // init data as soon as this module is ready, 
-    // other will resolve their promises immediately if it's complete
-    getWordpressJSON().then(
+    getWordpressJSON().done(
         function (data) {
             data = JSON.parse(data.response);
             data.posts.forEach(function (item) {
                 babyList.push(item);
+                !categoryContains(item.categories[0].slug) && categories.push(item.categories[0].slug);
                 //Storage.newItem(item);
             });
         },
@@ -84,6 +95,7 @@
 
     WinJS.Namespace.define("Data", {
         items: babyGroupedList,
+        categories: getCategories,
         getItemReference: getItemReference,
         getItemsFromGroup: getItemsFromGroup,
         getItemIndex: getItemIndex,

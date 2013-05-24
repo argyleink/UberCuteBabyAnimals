@@ -12,6 +12,7 @@
         },
 
         initFlipview: function (startIndex) {
+            detail_flipview.style.height = window.innerHeight + 'px';
             flipview = detail_flipview.winControl;
 
             flipview.itemTemplate = this.renderer;

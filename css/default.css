@@ -46,6 +46,11 @@ section[role=main] {
             margin-top: 46px;
         }
 
+        
+.win-backbutton.top-bar {
+    margin:3em 4em 0 2em;
+}
+
         .fragment header[role=banner] .titlearea {
             -ms-grid-column: 2;
             margin-top: 25px;
@@ -194,7 +199,6 @@ a, a:visited {
 .win-top.win-appbar {
     border-bottom: 3px solid hsl(213, 92%, 90%);
     background-color:hsla(213, 92%, 93%, 0.8);
-    height:250px;
 }
 
 .win-commandimage {

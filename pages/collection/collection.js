@@ -19,11 +19,10 @@
             element.querySelector("header[role=banner] .pagetitle").textContent = group;
 
             listView.itemDataSource = pageList.dataSource;
-            listView.itemTemplate = element.querySelector(".itemtemplate");
-            listView.groupDataSource = pageList.groups.dataSource;
-            listView.groupHeaderTemplate = element.querySelector(".headertemplate");
+            listView.itemTemplate = this.itemRenderer;
             listView.oniteminvoked = this._itemInvoked.bind(this);
 
+            this.populateHeader();
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
         },
 
@@ -57,11 +56,44 @@
             }
         },
 
+        populateHeader: function() {
+            var cats = Data.categories()
+              , pool = document.createDocumentFragment();
+
+            for (var i = 0, l = cats.length; i < l; i++) {
+                var cat = document.createElement('dt');
+                cat.textContent = cats[i];
+                //cat.style.backgroundColor = 'hsl(213, 92%, ' + (85 + i) + '%)';
+                pool.appendChild(cat);
+            }
+
+            filter_list.appendChild(pool);
+
+            filter_list.addEventListener('click', function (e) {
+                WinJS.Navigation.navigate("/pages/collection/collection.html", { groupKey: e.srcElement.textContent });
+            }.bind(this));
+        },
+
         _itemInvoked: function (args) {
             var item = this._items.getAt(args.detail.itemIndex);
             item = Data.resolveItemReference(item);
             var index = Data.getItemIndex(item);
             WinJS.Navigation.navigate("/pages/detail/detail.html", { item: item, index: index });
+        },
+
+        itemRenderer: function (itemPromise) {
+            return itemPromise.then(function (item) {
+                var div = document.createElement('div')
+                  , figure = document.createElement('figure');
+
+                figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.large.url + ')';
+                figure.className = 'item';
+
+                div.appendChild(figure);
+
+                return div;
+            });
         }
+
     });
 })();
