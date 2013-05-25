@@ -16,8 +16,10 @@
 
             Storage.session['home'] = Storage.session.home || {}; // init home session
 
-            boundList = Data.items;
-            this.initLayout();
+            Data.ready.then(function () {
+                boundList = Data.items;
+                this.initLayout();
+            }.bind(this));
         },
 
         updateLayout: function (element, viewState, lastViewState) {

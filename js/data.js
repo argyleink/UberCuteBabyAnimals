@@ -19,6 +19,43 @@
         }
     );
 
+    function ready() {
+        return new WinJS.Promise(function (comp, err, prog) {
+            getWordpressJSON().done(
+                function (data) {
+                    var itemCount = 0;
+
+                    data = JSON.parse(data.response);
+                    
+                    data.posts.forEach(function (item) {
+                        babyList.push(item);
+                        !categoryContains(item.categories[0].slug) && categories.push(item.categories[0].slug);
+
+                        // make 5 live tiles
+                        if (itemCount < 5) {
+                            liveTileContent.push({
+                                srcWide: item.attachments[0].images.large.url,
+                                srcSmall: item.attachments[0].images.medium.url,
+                                text: item.title
+                            });
+                            itemCount++;
+                        }
+
+                        //Storage.newItem(item);
+                    });
+
+                    updateLiveTiles();
+                    console.info('data loaded');
+                    comp();
+                },
+                function (error) {
+                    err(error);
+                    console.error(error);
+                }
+            );
+        });
+    }
+
     function getCategories() {
         return categories;
     }
@@ -81,41 +118,13 @@
         return new WinJS.xhr({ url: "http://dork.local/ubercute/?json=1" });
     }
 
-    getWordpressJSON().done(
-        function (data) {
-            var itemCount = 0;
-
-            data = JSON.parse(data.response);
-            data.posts.forEach(function (item) {
-                babyList.push(item);
-                !categoryContains(item.categories[0].slug) && categories.push(item.categories[0].slug);
-
-                // make 5 live tiles
-                if (itemCount < 5) {
-                    liveTileContent.push({
-                        srcWide: item.attachments[0].images.large.url,
-                        srcSmall: item.attachments[0].images.medium.url,
-                        text: item.title
-                    });
-                    itemCount++;
-                }
-
-                //Storage.newItem(item);
-            });
-
-            updateLiveTiles();
-        },
-        function (error) {
-            console.error(error);
-        }
-    );
-
     function updateLiveTiles() {
         liveTileService.initialize();
         liveTileService.updateLiveTiles(liveTileContent);
     }
 
     WinJS.Namespace.define("Data", {
+        ready: ready(),
         items: babyGroupedList,
         categories: getCategories,
         getItemReference: getItemReference,
