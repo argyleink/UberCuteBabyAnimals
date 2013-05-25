@@ -3,7 +3,9 @@
 
     var babyList = new WinJS.Binding.List()
       , babyGroupedList
-      , categories = [];
+      , categories = []
+      , liveTileService = App.LiveTile
+      , liveTileContent = [];
 
     babyGroupedList = babyList.createGrouped(
         function groupKeySelector(item) {
@@ -81,17 +83,37 @@
 
     getWordpressJSON().done(
         function (data) {
+            var itemCount = 0;
+
             data = JSON.parse(data.response);
             data.posts.forEach(function (item) {
                 babyList.push(item);
                 !categoryContains(item.categories[0].slug) && categories.push(item.categories[0].slug);
+
+                // make 5 live tiles
+                if (itemCount < 5) {
+                    liveTileContent.push({
+                        srcWide: item.attachments[0].images.large.url,
+                        srcSmall: item.attachments[0].images.medium.url,
+                        text: item.title
+                    });
+                    itemCount++;
+                }
+
                 //Storage.newItem(item);
             });
+
+            updateLiveTiles();
         },
         function (error) {
             console.error(error);
         }
     );
+
+    function updateLiveTiles() {
+        liveTileService.initialize();
+        liveTileService.updateLiveTiles(liveTileContent);
+    }
 
     WinJS.Namespace.define("Data", {
         items: babyGroupedList,
