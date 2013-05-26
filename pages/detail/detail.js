@@ -23,21 +23,28 @@
         renderer: function (itemPromise) {
             return itemPromise.then(function (item) {
                 var flipviewMarkup =
-                    '<section class="details"> \
+                    '<figcaption class="details"> \
                         <h1 class="title"></h1> \
                         <p class="blurb"></p> \
-                    </section> \
+                    </figcaption> \
                     <figure class="image-wrapper"> \
-                        <img class="image" /> \
-                        <figcaption class="caption"></figcaption> \
+                        <img class="loading" /> \
                     </figure>'
                 ;
 
                 var section = document.createElement('section');
                 section.innerHTML = flipviewMarkup;
+                section.className = 'flip-container';
+                section.style.height = window.innerHeight + 'px';
+                section.style.width = window.innerWidth + 'px';
 
                 section.querySelector('h1').textContent = item.data.title;
-                section.querySelector('img').src = item.data.attachments[0].images.large.url;
+
+                var image = image = section.querySelector('img');
+                image.src = item.data.attachments[0].images.large.url;
+                image.onload = function (e) {
+                    e.srcElement.className = "";
+                };
 
                 return section;
             });

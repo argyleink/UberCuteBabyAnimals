@@ -95,7 +95,7 @@
                   , figure = document.createElement('figure');
 
                 figure.style.backgroundImage = 'url('+ item.data.attachments[0].images.large.url + ')';
-                figure.className = 'hometile';
+                figure.className = 'hometile ' + item.index;
 
                 div.appendChild(figure);
 
