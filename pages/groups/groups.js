@@ -45,7 +45,14 @@
                 grouplist.groupDataSource = boundList.groups.dataSource;
                 grouplist.groupHeaderTemplate = this.headerRenderer;
                 grouplist.indexOfFirstVisible = Storage.session.home.index || 0;
-                grouplist.layout = new ui.GridLayout({ groupHeaderPosition: "top" });
+                grouplist.layout = new ui.GridLayout({
+                    groupHeaderPosition: "top"
+                  //, groupInfo: {
+                  //      enableCellSpanning: true,
+                  //      cellWidth: 200,
+                  //      cellHeight: 200
+                  //  }
+                });
 
                 groupsezo.itemDataSource = boundList.groups.dataSource;
                 groupsezo.itemTemplate = this.sezoRenderer;
@@ -115,15 +122,17 @@
 
         sezoRenderer: function(itemPromise) {
             return itemPromise.then(function (item) {
-                var section = document.createElement('section');
+                var section = document.createElement('section')
+                  , figure = document.createElement('figure')
+                  , title = document.createElement('h1');
 
-                var img = document.createElement('img');
-                //img.src = item.data.attachments[0].images.large.url;
+                section.className = 'sezo-item';
+                
+                figure.style.backgroundImage = 'url('+ item.data.image + ')';
 
-                var title = document.createElement('h1');
                 title.textContent = item.key;
 
-                section.appendChild(img);
+                section.appendChild(figure);
                 section.appendChild(title);
 
                 return section;

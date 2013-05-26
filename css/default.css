@@ -12,6 +12,10 @@ figure {
     padding:0;
 }
 
+img {
+    max-width:100%;
+}
+
 #contenthost {
     height: 100%;
     width: 100%;
