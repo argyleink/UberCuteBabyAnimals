@@ -20,7 +20,7 @@
             Storage.session['home'] = Storage.session.home || {}; // init home session
 
             Data.ready.then(function () {
-                boundList = Data.items;
+                boundList = Data.homeList;
                 this.initLayout();
             }.bind(this));
 
@@ -53,11 +53,11 @@
                 grouplist.indexOfFirstVisible = Storage.session.home.index || 0;
                 grouplist.layout = new ui.GridLayout({
                     groupHeaderPosition: "top"
-                  //, groupInfo: {
-                  //      enableCellSpanning: true,
-                  //      cellWidth: 200,
-                  //      cellHeight: 200
-                  //  }
+                  , groupInfo: {
+                        enableCellSpanning: true,
+                        cellWidth: appheight / 2,
+                        cellHeight: appheight / 2
+                    }
                 });
 
                 groupsezo.itemDataSource = boundList.groups.dataSource;
@@ -111,10 +111,30 @@
                 var div = document.createElement('div')
                   , figure = document.createElement('figure');
 
+                div.className = 'item'+item.data.catIndex;
+
                 figure.style.backgroundImage = 'url('+ item.data.attachments[0].images.large.url + ')';
-                figure.className = 'hometile ' + item.index;
-                figure.style.height = appheight + 'px';
-                figure.style.width = appheight + 'px';
+                figure.className = 'hometile';
+                figure.setAttribute('data-title', item.data.title);
+
+                switch (item.data.catIndex) {
+                    case 1:
+                        figure.style.height = (appheight / 2) - 10 + 'px';
+                        figure.style.width = appheight + 'px';
+                        break;
+                    case 2: case 3:
+                        figure.style.height = (appheight / 2) - 10 + 'px';
+                        figure.style.width = (appheight / 2) - 10 + 'px';
+                        break;
+                    case 3:
+                        figure.style.height = (appheight / 2) - 10 + 'px';
+                        figure.style.width = (appheight / 2) - 10 + 'px';
+                        break;
+                    case 4: case 5:
+                        figure.style.height = (appheight / 2) - 10 + 'px';
+                        figure.style.width = (appheight / 2) - 10 + 'px';
+                        break;
+                }
 
                 div.appendChild(figure);
 
@@ -143,11 +163,17 @@
         headerRenderer: function(itemPromise) {
             return itemPromise.then(function (item) {
                 var header = document.createElement('header');
+                header.className = 'home-header';
 
                 var title = document.createElement('h1');
                 title.textContent = item.key;
 
+                var count = document.createElement('span');
+                count.className = 'count';
+                count.textContent = item.data.post_count;
+
                 header.appendChild(title);
+                //header.appendChild(count);
 
                 header.onclick = function (event) {
                     Application.navigator.pageControl.navigateToGroup(this.key);
@@ -161,17 +187,21 @@
             return itemPromise.then(function (item) {
                 var section = document.createElement('section')
                   , figure = document.createElement('figure')
-                  , title = document.createElement('h1');
+                  , title = document.createElement('h1')
+                  , count = document.createElement('h2');
 
                 section.className = 'sezo-item';
-                section.style.height = (window.innerHeight - 220) + 'px';
+                section.style.height = (appheight + 60) + 'px';
+                section.style.width = ((appheight + 60) / 2) + 'px';
                 
                 figure.style.backgroundImage = 'url('+ item.data.image + ')';
 
                 title.textContent = item.key;
+                count.textContent = item.data.post_count;
 
                 section.appendChild(figure);
                 section.appendChild(title);
+                section.appendChild(count);
 
                 return section;
             });

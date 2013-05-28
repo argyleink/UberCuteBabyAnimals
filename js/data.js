@@ -1,9 +1,10 @@
 ﻿(function () {
     "use strict";
 
-    var everythingList = new WinJS.Binding.List()
+    var homeList = new WinJS.Binding.List()
       , babyList = new WinJS.Binding.List()
       , babyGroupedList
+      , homeGroupedList
       , categories = []
       , liveTileService = App.LiveTile
       , liveTileContent = []
@@ -16,19 +17,45 @@
 
     // else create new list
 
-    babyGroupedList = babyList.createGrouped(
-        function groupKeySelector(item) {
-            return item.categories[0].slug;
-        },
-        function groupDataSelector(item) {
-            return item.categories[0];
-        },
-        function getGroupKey(leftKey, rightKey) {
-            var left = leftKey.charCodeAt(0) + leftKey.charCodeAt(1);
-            var right = rightKey.charCodeAt(0) + rightKey.charCodeAt(1);
-            return left - right;
+    // group function
+    function groupKeySelector(item) {
+        return item.categories[0].slug;
+    }
+
+    function groupDataSelector(item) {
+        return item.categories[0];
+    }
+
+    function getGroupKey(leftKey, rightKey) {
+        var deep
+          , left = 0
+          , right = 0;
+
+        if (leftKey === rightKey)
+            return 0;
+
+        if (leftKey.charCodeAt(0) === rightKey.charCodeAt(0)) deep = 1;
+        if (deep === 1 && leftKey.charCodeAt(1) === rightKey.charCodeAt(1)) deep = 2;
+        if (deep === 2 && leftKey.charCodeAt(2) === rightKey.charCodeAt(2)) deep = 3;
+        if (deep === 3 && leftKey.charCodeAt(3) === rightKey.charCodeAt(3)) deep = 4;
+        if (deep === 4 && leftKey.charCodeAt(4) === rightKey.charCodeAt(4)) deep = 5;
+
+        if (deep === 0)
+            return leftKey.charCodeAt(0) - rightKey.charCodeAt(0);
+        if (!deep)
+            return leftKey.charCodeAt(0) - rightKey.charCodeAt(0);
+
+        for (var i = 0; i <= deep; i++) {
+            left += leftKey.charCodeAt(i);
+            right += rightKey.charCodeAt(i);
         }
-    );
+
+        return left - right;
+    }
+
+    // init group lists
+    babyGroupedList = babyList.createGrouped(groupKeySelector, groupDataSelector, getGroupKey);
+    homeGroupedList = homeList.createGrouped(groupKeySelector, groupDataSelector, getGroupKey);
 
     function dataRecieved(data) {
         var itemCount = 0;
@@ -72,6 +99,38 @@
     }
 
     function createHomeHubsList() {
+        var hubs = {
+            large: 5,
+            medium: 3,
+            small: 1
+        };
+        var cat = {
+            slug: '',
+            cur: 0,
+            changed: false,
+            size: hubs.large
+        };
+
+        babyGroupedList.forEach(function (item) {
+            if (cat.slug !== item.categories[0].slug) {
+                cat.changed = true;
+                cat.cur = 1;
+                cat.slug = item.categories[0].slug;
+                cat.group = resolveGroupReference(cat.slug);
+
+                //if (cat.group.post_count > 5) cat.size = 'large';
+                if (cat.group.post_count < 5 && cat.group.post_count > 3) cat.size = hubs.medium;
+                if (cat.group.post_count < 3) cat.size = hubs.small;
+            }
+            else {
+                if (cat.cur >= 5) return;
+                cat.cur += 1;
+            }
+            
+            item.catIndex = cat.cur;
+
+            homeList.push(item);
+        });
 
         readyComplete();
     }
@@ -107,7 +166,7 @@
     // Get the unique group corresponding to the provided group key.
     function resolveGroupReference(key) {
         for (var i = 0; i < babyGroupedList.groups.length; i++) {
-            if (babyGroupedList.groups.getAt(i).key === key) {
+            if (babyGroupedList.groups.getAt(i).slug === key) {
                 return babyGroupedList.groups.getAt(i);
             }
         }
@@ -165,6 +224,7 @@
     WinJS.Namespace.define("Data", {
         ready: ready(),
         items: babyGroupedList,
+        homeList: homeGroupedList,
         categories: getCategories,
         getItemReference: getItemReference,
         getItemsFromGroup: getItemsFromGroup,
