@@ -1,4 +1,16 @@
-﻿.win-semanticzoom {
+﻿.fragment.home section[role=main] {
+    
+}
+
+.fragment.home > header {
+    background-color:#efefef;
+}
+
+.homelist {
+    background-color:white;
+}
+
+.win-semanticzoom {
     height:100%;
 }
 
@@ -41,19 +53,38 @@ figure {
         box-sizing:border-box;
     }
 
+.homesezo {
+    background-color:white;
+}
+
+.homesezo .win-viewport {
+    padding-top:2rem;
+}
+
 .win-groupheader > h1 {
     text-transform:capitalize;
 }
 
 .sezo-item {
     width:400px;
-    height:400px;
+    border-bottom:5px solid hsl(213, 92%, 75%);
 }
 
 .sezo-item > figure {
-    width:400px;
-    height:300px;
+    width:100%;
+    height:calc(100% - 90px);
 }
+
+    .sezo-item h1 {
+        margin-top:0;
+        padding:0.5rem 0 20px 0;
+        box-sizing:border-box;
+
+        color:hsl(213, 92%, 75%);
+        /*background-color:hsl(213, 92%, 90%);*/
+        background-color:white;
+        text-transform:capitalize;
+    }
 
 @media screen and (-ms-view-state: snapped) {
     

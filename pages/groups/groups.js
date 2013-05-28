@@ -7,12 +7,15 @@
       , ui                  = WinJS.UI
       , grouplist
       , groupsezo
-      , boundList;
+      , boundList
+      , appheight
+      , appwidth;
 
     ui.Pages.define("/pages/groups/groups.html", {
 
         ready: function (element, options) {
             this.page = element;
+            this.setAppSize();
 
             Storage.session['home'] = Storage.session.home || {}; // init home session
 
@@ -20,11 +23,14 @@
                 boundList = Data.items;
                 this.initLayout();
             }.bind(this));
+
+            this.appbarInit();
         },
 
         updateLayout: function (element, viewState, lastViewState) {
             this.page = this.page || element;
             viewState = viewState || appViewState;
+            this.setAppSize();
 
             if (viewState === appViewState.snapped) {
 
@@ -71,6 +77,17 @@
             this.updateLayout();
         },
 
+        setAppSize: function() {
+            appheight = window.innerHeight - 260;
+            appwidth = window.innerWidth;
+        },
+
+        appbarInit: function() {
+            group_toggle.addEventListener('click', function (e) {
+                this.seeAll();
+            }.bind(this));
+        },
+
         populateHeader: function() {
             var cats = Data.categories()
               , pool = document.createDocumentFragment();
@@ -96,6 +113,26 @@
 
                 figure.style.backgroundImage = 'url('+ item.data.attachments[0].images.large.url + ')';
                 figure.className = 'hometile ' + item.index;
+                figure.style.height = appheight + 'px';
+                figure.style.width = appheight + 'px';
+
+                div.appendChild(figure);
+
+                return div;
+            });
+        },
+
+        itemAllRenderer: function(itemPromise) {
+            return itemPromise.then(function (item) {
+                var div = document.createElement('div')
+                  , figure = document.createElement('figure');
+
+                figure.style.backgroundImage = 'url('+ item.data.attachments[0].images.large.url + ')';
+                figure.className = 'hometile ' + item.index;
+
+                // TODO: make this fun and dynamic
+                figure.style.height = appheight / 3 + 'px';
+                figure.style.width = appheight / 3 + 'px';
 
                 div.appendChild(figure);
 
@@ -127,6 +164,7 @@
                   , title = document.createElement('h1');
 
                 section.className = 'sezo-item';
+                section.style.height = (window.innerHeight - 220) + 'px';
                 
                 figure.style.backgroundImage = 'url('+ item.data.image + ')';
 
@@ -173,6 +211,15 @@
 
         navigateToGroup: function (key) {
             nav.navigate("/pages/collection/collection.html", { groupKey: key });
+        },
+
+        seeAll: function () {
+            grouplist.itemTemplate = this.itemAllRenderer;
+            grouplist.itemDataSource = boundList.dataSource;
+            grouplist.groupDataSource = null;
+            grouplist.groupHeaderTemplate = null;
+            grouplist.indexOfFirstVisible = Storage.session.home.index || 0;
+            grouplist.layout = new ui.GridLayout();
         }
 
     });

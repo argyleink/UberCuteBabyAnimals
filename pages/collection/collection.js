@@ -2,7 +2,8 @@
     "use strict";
 
     var appViewState = Windows.UI.ViewManagement.ApplicationViewState
-      , ui = WinJS.UI;
+      , ui = WinJS.UI
+      , appheight = window.innerHeight - 220;
 
     ui.Pages.define("/pages/collection/collection.html", {
         _items: null,
@@ -32,6 +33,8 @@
 
         updateLayout: function (element, viewState, lastViewState) {
             var listView = element.querySelector(".itemslist").winControl;
+            appheight = window.innerHeight;
+
             if (lastViewState !== viewState) {
                 if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
                     var handler = function (e) {
@@ -88,6 +91,8 @@
 
                 figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.large.url + ')';
                 figure.className = 'item';
+                figure.style.height = (appheight / 2) + 'px';
+                figure.style.width = (appheight / 2) + 'px';
 
                 div.appendChild(figure);
 

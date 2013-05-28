@@ -63,7 +63,7 @@
             readyComplete = comp;
             readyError = err;
 
-            getWordpressJSON().done(dataRecieved, error);
+            getWordpressJSON().then(dataRecieved, error);
         });
     }
 
@@ -87,7 +87,11 @@
     // that belong to the provided group.
     function getItemsFromGroup(slug) {
         return babyList.createFiltered(function (item) {
-            return item.categories[0].slug === slug;
+            for (var i = 0, l = item.categories.length; i < l; i++) {
+                if (item.categories[i].slug === slug)
+                    return true;
+            }
+            return false;
         });
     }
 
@@ -132,7 +136,11 @@
     }
 
     function getWordpressJSON() {
-        return new WinJS.xhr({ url: "http://dork.local/ubercute/?json=1" });
+        return new WinJS.xhr({
+            url: 'http://dork.local/ubercute/?json=1'
+          , type: 'GET'
+          , responseType: 'json'
+        });
     }
 
     function updateLiveTiles() {

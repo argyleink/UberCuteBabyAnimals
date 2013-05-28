@@ -18,6 +18,8 @@
             flipview.itemTemplate = this.renderer;
             flipview.itemDataSource = Data.items.dataSource;
             flipview.currentPage = startIndex || 0;
+
+            detail_flipview.focus();
         },
 
         renderer: function (itemPromise) {
@@ -34,14 +36,15 @@
 
                 var section = document.createElement('section');
                 section.innerHTML = flipviewMarkup;
-                section.className = 'flip-container';
+                section.className = 'flip-container'; // win-interactive
                 section.style.height = window.innerHeight + 'px';
                 section.style.width = window.innerWidth + 'px';
 
                 section.querySelector('h1').textContent = item.data.title;
 
                 var image = image = section.querySelector('img');
-                image.src = item.data.attachments[0].images.large.url;
+                image.style.width = window.innerWidth + 'px';
+                image.src = item.data.attachments[0].images.full.url;
                 image.onload = function (e) {
                     e.srcElement.className = "";
                 };

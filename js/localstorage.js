@@ -73,6 +73,6 @@
         newItem: newItem
     });
 
-    getCache();
+    //getCache();
 
 })();
