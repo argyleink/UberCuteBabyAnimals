@@ -77,9 +77,9 @@
                     srcSmall: item.attachments[0].images.medium.url,
                     text: item.title
                 });
-                itemCount++;
             }
 
+            itemCount++;
             //Storage.newItem(item);
         });
 
@@ -111,7 +111,7 @@
             size: hubs.large
         };
 
-        babyGroupedList.forEach(function (item) {
+        babyGroupedList.forEach(function (item, index) {
             if (cat.slug !== item.categories[0].slug) {
                 cat.changed = true;
                 cat.cur = 1;
@@ -128,6 +128,7 @@
             }
             
             item.catIndex = cat.cur;
+            item.allIndex = index;
 
             homeList.push(item);
         });

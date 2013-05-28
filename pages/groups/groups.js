@@ -116,6 +116,7 @@
                 figure.style.backgroundImage = 'url('+ item.data.attachments[0].images.large.url + ')';
                 figure.className = 'hometile';
                 figure.setAttribute('data-title', item.data.title);
+                figure.setAttribute('data-all-index', item.data.allIndex);
 
                 switch (item.data.catIndex) {
                     case 1:
@@ -229,11 +230,13 @@
                 var group = Data.groups.getAt(args.detail.itemIndex);
                 this.navigateToGroup(group.key);
             } else {
-                var item = boundList.getAt(args.detail.itemIndex);
+                // var item = boundList.getAt(args.detail.itemIndex);
+                var idx = parseInt(args.srcElement.querySelector('figure').getAttribute('data-all-index'))
+                var item = Data.items.getAt(idx);
                 Storage.session.home.index = args.detail.itemIndex;
 
                 nav.navigate("/pages/detail/detail.html", {
-                    item: Data.getItemReference(item),
+                    item: item,
                     index: args.detail.itemIndex
                 });
             }

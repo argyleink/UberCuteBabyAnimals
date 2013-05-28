@@ -8,7 +8,7 @@
         
         ready: function (element, options) {
             item = options && options.item ? Data.resolveItemReference(options.item) : Data.items.getAt(0);
-            this.initFlipview(options.index);
+            this.initFlipview(options.item.allIndex);
         },
 
         initFlipview: function (startIndex) {
