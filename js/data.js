@@ -1,11 +1,14 @@
 ﻿(function () {
     "use strict";
 
-    var babyList = new WinJS.Binding.List()
+    var everythingList = new WinJS.Binding.List()
+      , babyList = new WinJS.Binding.List()
       , babyGroupedList
       , categories = []
       , liveTileService = App.LiveTile
       , liveTileContent = []
+      , rawData
+      , rawJSON
       , readyComplete
       , readyError;
 
@@ -30,9 +33,10 @@
     function dataRecieved(data) {
         var itemCount = 0;
 
-        data = JSON.parse(data.response);
+        rawData = data.response;
+        rawJSON = JSON.parse(data.response);
 
-        data.posts.forEach(function (item) {
+        rawJSON.posts.forEach(function (item) {
             item.title = decodeHtml(item.title);
             item.categories[0].image = item.attachments[0].images.large.url;
 
@@ -54,8 +58,8 @@
 
         updateLiveTiles();
 
-        console.info('data loaded');
-        readyComplete();
+        //console.info('data loaded');
+        createHomeHubsList();
     }
 
     function ready() {
@@ -65,6 +69,11 @@
 
             getWordpressJSON().then(dataRecieved, error);
         });
+    }
+
+    function createHomeHubsList() {
+
+        readyComplete();
     }
 
     function decodeHtml(html) {
