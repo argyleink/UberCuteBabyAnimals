@@ -123,8 +123,15 @@
                 if (cat.group.post_count < 3) cat.size = hubs.small;
             }
             else {
-                if (cat.cur >= 5) return;
+                if (cat.cur >= 4) {
+                    return;
+                }
                 cat.cur += 1;
+            }
+
+            if (cat.cur == 1) {
+                homeList.push(fakeItem('See All', cat, item));
+                homeList.push(fakeItem('New', cat, item));
             }
             
             item.catIndex = cat.cur;
@@ -134,6 +141,19 @@
         });
 
         readyComplete();
+    }
+
+    function fakeItem(title, cat, item) {
+        var item = {
+            box: true,
+            title: title,
+            catIndex: cat.cur,
+            count: title === 'New' ? 0 : cat.group.post_count,
+            image: item.attachments[0].images.large.url,
+            attachments: item.attachments,
+            categories: item.categories
+        };
+        return item;
     }
 
     function decodeHtml(html) {

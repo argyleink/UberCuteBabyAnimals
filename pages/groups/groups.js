@@ -46,7 +46,7 @@
 
             } else {
                 
-                grouplist.itemTemplate = this.itemRenderer;
+                grouplist.itemTemplate = this.itemRenderer.bind(this);
                 grouplist.itemDataSource = boundList.dataSource;
                 grouplist.groupDataSource = boundList.groups.dataSource;
                 grouplist.groupHeaderTemplate = this.headerRenderer;
@@ -70,6 +70,7 @@
         initLayout: function () {
             grouplist = group_list.winControl;
             grouplist.oniteminvoked = this._itemInvoked.bind(this);
+            grouplist.selectionMode = 'none';
 
             groupsezo = group_sezo.winControl;
             
@@ -111,36 +112,73 @@
                 var div = document.createElement('div')
                   , figure = document.createElement('figure');
 
-                div.className = 'item'+item.data.catIndex;
+                div.className = 'item' + item.data.catIndex;
 
-                figure.style.backgroundImage = 'url('+ item.data.attachments[0].images.large.url + ')';
-                figure.className = 'hometile';
-                figure.setAttribute('data-title', item.data.title);
-                figure.setAttribute('data-all-index', item.data.allIndex);
+                if (item.data.box) {
+                    var boxHeight = (appheight / 2) - 10;
+                    var boxWidth = (appheight / 2) - 10;
 
-                switch (item.data.catIndex) {
-                    case 1:
-                        figure.style.height = (appheight / 2) - 10 + 'px';
-                        figure.style.width = appheight + 'px';
-                        break;
-                    case 2: case 3:
-                        figure.style.height = (appheight / 2) - 10 + 'px';
-                        figure.style.width = (appheight / 2) - 10 + 'px';
-                        break;
-                    case 3:
-                        figure.style.height = (appheight / 2) - 10 + 'px';
-                        figure.style.width = (appheight / 2) - 10 + 'px';
-                        break;
-                    case 4: case 5:
-                        figure.style.height = (appheight / 2) - 10 + 'px';
-                        figure.style.width = (appheight / 2) - 10 + 'px';
-                        break;
+                    var seeAll = this.groupTile({
+                        count: item.data.count,
+                        label: item.data.title,
+                        width: boxWidth,
+                        height: boxHeight
+                    });
+
+                    div.appendChild(seeAll);
+                }
+                else {
+                    this.setItemAttributes(figure, item);
+                    switch (item.data.catIndex) {
+                        case 2:
+                            figure.style.height = (appheight / 2) - 10 + 'px';
+                            figure.style.width = appheight + 'px';
+                            break;
+                        case 3: case 4:
+                            figure.style.height = (appheight / 2) - 15 + 'px';
+                            figure.style.width = (appheight / 2) - 10 + 'px';
+                            break;
+                        default:
+                            figure.style.height = appheight + 'px';
+                            figure.style.width = appheight + 'px';
+                            break;
+                    }
                 }
 
                 div.appendChild(figure);
 
                 return div;
-            });
+            }.bind(this));
+        },
+
+        setItemAttributes: function(figure, item) {
+            figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.large.url + ')';
+            figure.className = 'hometile';
+            figure.setAttribute('data-title', item.data.title);
+            figure.setAttribute('data-all-index', item.data.allIndex);
+        },
+
+        groupTile: function(options) {
+            var box = document.createElement('div')
+              , wrap = document.createElement('div')
+              , count = document.createElement('h1')
+              , label = document.createElement('h2');
+
+            box.className = 'group-tile';
+            box.style.width = options.width + 'px';
+            box.style.height = options.height + 'px';
+
+            wrap.className = 'center';
+
+            count.textContent = options.count || 0;
+            label.textContent = options.label || '';
+
+            wrap.appendChild(count);
+            wrap.appendChild(label);
+
+            box.appendChild(wrap);
+
+            return box;
         },
 
         itemAllRenderer: function(itemPromise) {

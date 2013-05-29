@@ -74,9 +74,36 @@ figure {
     content:"see all ";
 }
 
+.group-tile {
+    display:-ms-inline-flexbox;
+    position:relative;
+    background-color:hsl(213, 92%, 85%);
+    color:white;
+}
+
+    .group-tile .center {
+        margin:auto;
+    }
+
+    .group-tile h1 {
+        font-size:10rem;
+        padding:0;
+    }
+    .group-tile h2 {
+        font-size:1.3rem;
+        text-align:center;
+        width:100%;
+        padding:0.5rem;
+        box-sizing:border-box;
+        position:absolute;
+        bottom:0;
+        left:0;
+        background-color:hsl(213, 92%, 80%);
+    }
+
 .sezo-item {
     width:400px;
-    border-bottom:5px solid hsl(213, 92%, 75%);
+    border-bottom:5px solid hsl(213, 92%, 80%);
 }
 
 .sezo-item > figure {
