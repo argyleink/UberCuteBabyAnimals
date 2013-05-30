@@ -27,8 +27,25 @@
 }
 
 .flip-container h1 {
-    color:white;
+    color:hsl(0, 0%, 99%);
     text-shadow:1px 1px 0 rgba(0,0,0,0.5);
+}
+
+.flip-container article {
+    display:-ms-flexbox;
+}
+
+    .flip-container article section {
+        margin:auto;
+    }
+
+.flip-container h2 {
+    color:hsl(213, 92%, 85%);
+    font-family:'Segoe Script';
+}
+
+.flip-container blockquote {
+    color:#666;
 }
 
 @media screen and (-ms-view-state: snapped) {

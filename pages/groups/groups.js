@@ -73,6 +73,7 @@
             grouplist.selectionMode = 'none';
 
             groupsezo = group_sezo.winControl;
+            groupsezo.selectionMode = 'none';
             
             this.populateHeader();
             this.updateLayout();
@@ -135,8 +136,9 @@
                             figure.style.width = appheight + 'px';
                             break;
                         case 3: case 4:
-                            figure.style.height = (appheight / 2) - 15 + 'px';
-                            figure.style.width = (appheight / 2) - 10 + 'px';
+                            var square = (appheight / 2) - 10;
+                            figure.style.height = square + 'px';
+                            figure.style.width = square + 'px';
                             break;
                         default:
                             figure.style.height = appheight + 'px';
@@ -164,7 +166,7 @@
               , count = document.createElement('h1')
               , label = document.createElement('h2');
 
-            box.className = 'group-tile';
+            box.className = options.label === 'See All' ? 'group-tile first' : 'group-tile';
             box.style.width = options.width + 'px';
             box.style.height = options.height + 'px';
 
@@ -267,7 +269,11 @@
             if (appView.value === appViewState.snapped) {
                 var group = Data.groups.getAt(args.detail.itemIndex);
                 this.navigateToGroup(group.key);
-            } else {
+            }
+            else if (args.detail.itemPromise._value.data.box) {
+                this.navigateToGroup(args.detail.itemPromise._value.data.categories[0].slug);
+            }
+            else {
                 // var item = boundList.getAt(args.detail.itemIndex);
                 var idx = parseInt(args.srcElement.querySelector('figure').getAttribute('data-all-index'))
                 var item = Data.items.getAt(idx);

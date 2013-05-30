@@ -4,7 +4,16 @@
 */
 
 body {
-    background-color:#efefef;
+    /*background-color:hsl(213, 95%, 95%);*/
+}
+
+.fragment > header {
+    /*background-color:hsl(213, 92%, 90%);*/
+    border-bottom:0.5rem hsl(213, 92%, 93%) solid;
+}
+
+.win-listview {
+    background-color:hsl(213, 92%, 98%);
 }
 
 figure {
@@ -75,69 +84,14 @@ section[role=main] {
     }
 
 .pagetitle {
-    color:#555;
-    text-shadow:0 -1px 0 white;
+    color: hsl(213, 92%, 85%);
     text-transform:capitalize;
+    font-weight:normal;
 }
 
     .pagetitle > img {
         height:80px;
     }
-
-#splashBackground {
-    width:100%;
-    height:100%;
-    z-index:5;
-
-    background-color:#eee;
-}
-
-#splashBackground, #extended-splash-image, #statusview, #network-status, #message {
-    position: absolute;
-}
-
-#progress-status {
-    position:absolute;
-}
-
-#statusview {
-    height:100%;
-    width:100%;
-    z-index:100;
-    top:0;
-    display:none !important;
-}
-
-#progress-status {
-    height:10px;
-    width:100%;
-    z-index:100;
-    bottom:10px;
-    z-index:100;
-}
-
-    #progress-status.out {
-        display:none;
-    }
-
-#loading-status {
-    height:10px;
-    width:100%;
-    z-index:100;
-    bottom:5px;
-    display:none;
-}
-
-    #loading-status progress {
-        color:#B3D4FC;
-    }
-
-#network-status {
-    padding:10px;
-    background-color:white;
-    border:2px solid #ccc;
-    margin-left:10px;
-}
 
 .none {
     display:none;
@@ -165,7 +119,7 @@ section[role=main] {
 
 /* custom scroll colors for touch only, looks better that way */
 body.touch {
-    -ms-scrollbar-base-color:#B3D4FC; 
+    -ms-scrollbar-base-color: hsl(213, 92%, 85%); 
 }
 
 a, a:visited {
@@ -181,8 +135,8 @@ a, a:visited {
 .win-backbutton,
 .win-commandring
 {
-    border-color:hsl(213, 92%, 75%) !important;
-    color:hsl(213, 92%, 75%) !important;
+    border-color:hsl(213, 92%, 85%) !important;
+    color:hsl(213, 92%, 85%) !important;
 }
 
 .win-label {
@@ -195,14 +149,13 @@ a, a:visited {
 .win-top.win-appbar {
     background-color:hsl(213, 92%, 93%);
     box-sizing:content-box;
-    /*border-right: 3px solid #B3D4FC;*/
 }
 .win-commandlayout.win-appbar {
     border-top: 3px solid hsl(213, 92%, 90%);
 }
 .win-top.win-appbar {
     border-bottom: 3px solid hsl(213, 92%, 90%);
-    background-color:hsla(213, 92%, 93%, 0.98);
+    background-color:hsla(213, 92%, 93%, 0.99);
 }
 
 .win-commandimage {
@@ -247,18 +200,20 @@ progress.win-ring {
 }
 
 progress:indeterminate {
-    color: #555; 
+    color:hsl(213, 92%, 75%); 
 }
 
 #itemFlipview.win-flipview .win-navbutton {
-    background-color:#EEE;
-    color:#888;
+    background-color:hsl(213, 92%, 85%);
+    border-bottom:5px solid hsl(213, 92%, 75%);
+    border-radius:0 0 3px 3px;
+    color:white;
 }
 
 
 #itemFlipview.win-flipview .win-navbutton:active,
 #itemFlipview.win-flipview .win-navbutton:hover {
-    background-color:#CCC;
+    background-color:hsl(213, 92%, 73%);
 }
 
 /* star rating native component */
@@ -285,17 +240,17 @@ progress:indeterminate {
 /* tickle / right click listview item select colors */
 ::selection,
 .win-selectionborder {
-    border-color:#B3D4FC !important;
+    border-color:hsl(213, 92%, 95%) !important;
 }
 
 .win-focusedoutline  {
-    outline-color:#B3D4FC !important;
+    outline-color:hsl(213, 92%, 95%) !important;
 }
 
 .win-selectioncheckmarkbackground,
 .win-container:hover .win-selectioncheckmarkbackground {
-    border-top-color:#B3D4FC !important;
-    border-right-color:#B3D4FC !important;
+    border-top-color:hsl(213, 92%, 95%) !important;
+    border-right-color:hsl(213, 92%, 95%) !important;
 }
 
 .win-selectioncheckmark {

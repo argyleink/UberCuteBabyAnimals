@@ -1,10 +1,5 @@
-﻿.fragment.collection > header {
-    background-color:#efefef;
-}
-
-.itemslist {
+﻿.itemslist {
     height:100%;
-    background-color:white;
 }
 
 .itemslist .win-viewport {

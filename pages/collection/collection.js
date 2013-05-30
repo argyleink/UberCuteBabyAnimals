@@ -89,7 +89,7 @@
                 var div = document.createElement('div')
                   , figure = document.createElement('figure');
 
-                figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.medium.url + ')';
+                figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.large.url + ')';
                 figure.className = 'item';
                 figure.style.height = (appheight / 2) + 'px';
                 figure.style.width = (appheight / 2) + 'px';
