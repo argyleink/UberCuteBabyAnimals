@@ -175,7 +175,7 @@
     // This function returns a WinJS.Binding.List containing only the items
     // that belong to the provided group.
     function getItemsFromGroup(slug) {
-        return babyList.createFiltered(function (item) {
+        return babyGroupedList.createFiltered(function (item) {
             for (var i = 0, l = item.categories.length; i < l; i++) {
                 if (item.categories[i].slug === slug)
                     return true;

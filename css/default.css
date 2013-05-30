@@ -203,17 +203,17 @@ progress:indeterminate {
     color:hsl(213, 92%, 75%); 
 }
 
-#itemFlipview.win-flipview .win-navbutton {
+.win-flipview .win-navbutton {
     background-color:hsl(213, 92%, 85%);
     border-bottom:5px solid hsl(213, 92%, 75%);
-    border-radius:0 0 3px 3px;
-    color:white;
+    border-radius:0 0 0.4rem 0;
+    color:hsl(213, 90%, 60%);
 }
 
-
-#itemFlipview.win-flipview .win-navbutton:active,
-#itemFlipview.win-flipview .win-navbutton:hover {
-    background-color:hsl(213, 92%, 73%);
+.win-flipview .win-navbutton:active,
+.win-flipview .win-navbutton:hover {
+    background-color:hsl(213, 92%, 86%);
+    color:white;
 }
 
 /* star rating native component */
@@ -233,18 +233,18 @@ progress:indeterminate {
 
 /* listview styles */
 .win-listview .win-container:hover {
-    background-color: #B3D4FC; /* set opacity to 0 on rgba to remove hover effects */
-    outline: #B3D4FC solid 3px;
+    background-color: none; /* set opacity to 0 on rgba to remove hover effects */
+    outline:none;
 }
 
 /* tickle / right click listview item select colors */
 ::selection,
 .win-selectionborder {
-    border-color:hsl(213, 92%, 95%) !important;
+    border-color:transparent !important;
 }
 
 .win-focusedoutline  {
-    outline-color:hsl(213, 92%, 95%) !important;
+    outline-color:hsla(213, 92%, 95%, 0) !important;
 }
 
 .win-selectioncheckmarkbackground,

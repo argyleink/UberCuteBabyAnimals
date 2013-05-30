@@ -156,5 +156,8 @@ figure {
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
-    
+    figure {
+        background-size:cover;
+        background-position:center center;
+    }
 }

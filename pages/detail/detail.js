@@ -2,24 +2,48 @@
     "use strict";
 
     var item
-      , flipview;
+      , flipview
+      , appheight
+      , appwidth
+      , appViewState = Windows.UI.ViewManagement.ApplicationViewState;
 
     WinJS.UI.Pages.define("/pages/detail/detail.html", {
         
         ready: function (element, options) {
             item = options && options.item ? Data.resolveItemReference(options.item) : Data.items.getAt(0);
-            this.initFlipview(options.item.allIndex);
+            this.setAppSize();
+            this.initFlipview(options.item);
         },
 
-        initFlipview: function (startIndex) {
-            detail_flipview.style.height = window.innerHeight + 'px';
+        initFlipview: function (item) {
             flipview = detail_flipview.winControl;
 
             flipview.itemTemplate = this.renderer;
-            flipview.itemDataSource = Data.items.dataSource;
-            flipview.currentPage = startIndex || 0;
+            flipview.itemDataSource = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
+            flipview.currentPage = item.catIndex - 1 || 0;
 
             detail_flipview.focus();
+        },
+
+        updateLayout: function (element, viewState, lastViewState) {
+            this.setAppSize();
+
+            if (viewState === appViewState.snapped) {
+                console.log('snapped');
+            }
+            else if (viewState === appViewState.fullScreenPortrait) {
+                flipview.orientation = 'vertical';
+            }
+            else if (viewState === appViewState.fullScreenLandscape) {
+                flipview.orientation = 'horizontal';
+            }
+        },
+
+        setAppSize: function() {
+            appheight = window.innerHeight;
+            appwidth = window.innerWidth;
+
+            detail_flipview.style.height = appheight + 'px';
         },
 
         renderer: function (itemPromise) {
@@ -49,13 +73,13 @@
                 var section = document.createElement('section');
                 section.innerHTML = flipviewMarkup;
                 section.className = 'flip-container'; // win-interactive
-                section.style.height = window.innerHeight + 'px';
-                section.style.width = window.innerWidth + 'px';
+                section.style.height = appheight + 'px';
+                section.style.width = appwidth + 'px';
 
                 section.querySelector('h1').textContent = item.data.title;
 
                 var image = image = section.querySelector('img');
-                image.style.width = window.innerWidth + 'px';
+                image.style.width = appwidth + 'px';
                 image.src = item.data.attachments[0].images.full.url;
                 image.onload = function (e) {
                     e.srcElement.className = "";

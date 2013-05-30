@@ -53,5 +53,11 @@
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
-    
+    .flip-container {
+        overflow-y:hidden;
+        overflow-x:auto;
+    }
+        .flip-container > figcaption {
+            position:relative;
+        }
 }
