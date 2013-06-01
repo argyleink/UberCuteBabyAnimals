@@ -108,7 +108,8 @@
                         count: item.data.count,
                         label: item.data.title,
                         width: boxWidth,
-                        height: boxHeight
+                        height: boxHeight,
+                        cat: item.data.categories[0].slug
                     });
 
                     div.classList.add('box');
@@ -162,7 +163,7 @@
 
             wrap.className = 'center';
 
-            count.textContent = options.count || 0;
+            count.textContent = options.count || Data.getCategory(options.cat).newCount;
             label.textContent = options.label || '';
 
             wrap.appendChild(count);

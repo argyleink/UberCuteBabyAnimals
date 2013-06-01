@@ -72,9 +72,17 @@
             if (!categoryContains(item.categories[0].slug)) {
                 categories.push({
                     slug: item.categories[0].slug, 
-                    image: item.attachments[0].images.medium.url
+                    image: item.attachments[0].images.medium.url,
+                    newCount: 0
                 });
             }
+
+            Storage.exists(item.id).done(function(result) {
+                if (result == false) {
+                    item.new = true;
+                    getCategory(item.categories[0].slug).newCount += 1;
+                }
+            });
 
             // make 5 live tiles
             if (itemCount < 5) {
@@ -86,13 +94,13 @@
             }
 
             itemCount++;
-            //Storage.newItem(item);
         });
 
         updateLiveTiles();
 
         //console.info('data loaded');
         createHomeHubsList();
+        //Storage.updateFeed(rawJSON);
     }
 
     function ready() {
@@ -170,6 +178,17 @@
 
     function getCategories() {
         return categories;
+    }
+
+    function getCategory(slug) {
+        var cat;
+        categories.some(function (item) {
+            if (item.slug === slug) {
+                cat = item;
+                return item;
+            }
+        });
+        return cat;
     }
 
     // Get a reference for an item, using the group key and item title as a
@@ -261,6 +280,7 @@
         items: babyGroupedList,
         homeList: homeGroupedList,
         categories: getCategories,
+        getCategory: getCategory,
         getItemReference: getItemReference,
         getItemsFromGroup: getItemsFromGroup,
         getItemIndex: getItemIndex,

@@ -10,7 +10,7 @@
     
     <div id="detail_top_appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement:'top', layout: 'custom'}">
         <ul id="filter_list">
-            <li>
+            <li onclick="WinJS.Navigation.back()">
                 <button id="cmdBack" class="win-backbutton top-bar" aria-label="Back"></button>
             </li>
             <li onclick="WinJS.Navigation.navigate(Application.navigator.home)">

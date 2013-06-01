@@ -7,12 +7,34 @@
       , sessionState = WinJS.Application.sessionState
       , cacheJSON;
 
-    function setCache(data) {
+    function setFeedCache(data) {
         console.info('new data');
-        localStorage.writeText('feed', JSON.stringify(data));
+        if (!existsFeedCache()) {
+            localStorage.writeText('feed', JSON.stringify(data));
+        }
+        else {
+            compareFeeds(data);
+        }
     }
 
-    function getCache() {
+    function compareFeeds(newList) {
+        
+    }
+
+    function deepEquals(o1, o2) {
+        var k1 = Object.keys(o1).sort();
+        var k2 = Object.keys(o2).sort();
+        if (k1.length != k2.length) return false;
+        return k1.zip(k2, function(keyPair) {
+            if(typeof o1[keyPair[0]] == typeof o2[keyPair[1]] == "object"){
+                return deepEquals(o1[keyPair[0]], o2[keyPair[1]])
+            } else {
+                return o1[keyPair[0]] == o2[keyPair[1]];
+            }
+        }).all();
+    }
+
+    function getFeedCache() {
         localStorage.readText('feed').done(
             function (data) {
                 cacheJSON = JSON.parse(data);
@@ -21,12 +43,12 @@
         );
     }
     
-    function existsCache() {
+    function existsFeedCache() {
         if (cacheJSON) return true;
 
         localStorage.exists('feed').done(
-            function (data) {
-                return true;
+            function (result) {
+                return result;
             },
             function () {
                 return false;
@@ -35,29 +57,27 @@
     }
 
     function newItem(item) {
-        if (cacheJSON) {
+        cache().done(function (cache) {
             cacheJSON.posts.push(item);
-        }
-        else {
-            cache().done(function (cache) {
-                cache.posts.push(item);
-            });
-        }
+        });
     }
 
     function newItems(items) {
-        if (cacheJSON) {
+        cache().done(function (cache) {
             items.forEach(function (item) {
                 cacheJSON.posts.push(item);
             });
+        });
+    }
+
+    function viewImage(id) {
+        if (!hasViewedImage(id)) {
+            localStorage.writeText(id, "true");
         }
-        else {
-            cache().done(function (cache) {
-                items.forEach(function (item) {
-                    cache.posts.push(item);
-                });
-            });
-        }
+    }
+
+    function hasViewedImage(id) {
+        return localStorage.exists(id.toString());
     }
 
     function error(error) {
@@ -68,11 +88,13 @@
         settings: localSettings,
         local: localStorage,
         session: sessionState,
-        hasCache: existsCache,
-        update: setCache,
-        newItem: newItem
+        hasFeedCache: existsFeedCache,
+        updateFeed: setFeedCache,
+        exists: hasViewedImage,
+        viewImage: viewImage
     });
 
-    //getCache();
+    if (existsFeedCache())
+        getFeedCache();
 
 })();

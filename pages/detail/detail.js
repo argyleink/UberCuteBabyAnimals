@@ -27,6 +27,10 @@
             flipview.itemTemplate = this.renderer;
             flipview.itemDataSource = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
             flipview.currentPage = item.catIndex - 1 || 0;
+            flipview.onpagecompleted = function (e) {
+                Storage.viewImage(this.id);
+                Data.getCategory(this.categories[0].slug).newCount -= 1;
+            }.bind(item)
 
             detail_flipview.focus();
         },
