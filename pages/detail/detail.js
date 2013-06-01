@@ -16,6 +16,9 @@
             CategoryHeader.create(filter_list);
             this.initFlipview(options.item);
             this.initLike();
+
+            App.Share.enable();
+            App.Share.data(options.item);
         },
 
         initFlipview: function (item) {

@@ -78,7 +78,7 @@
             groupsezo = group_sezo.winControl;
             groupsezo.selectionMode = 'none';
             
-            CategoryHeader.create(filter_list);
+            //CategoryHeader.create(filter_list);
             this.updateLayout();
         },
 

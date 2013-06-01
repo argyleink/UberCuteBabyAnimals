@@ -26,7 +26,7 @@
             }.bind(this));
 
             // set title
-            element.querySelector("header[role=banner] .pagetitle").textContent = 'Results for “' + query + '”';
+            element.querySelector("header[role=banner] .pagetitle").textContent = '“' + query + '”';
             resultslength.textContent = this._items.length + ' results';
 
             CategoryHeader.create(filter_list);
