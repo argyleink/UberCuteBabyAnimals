@@ -145,7 +145,7 @@ a, a:visited {
 .win-commandring
 {
     border-color:hsl(213, 92%, 85%) !important;
-    color:hsl(213, 92%, 85%) !important;
+    color:hsl(213, 92%, 75%) !important;
 }
 
 .win-label {
@@ -155,7 +155,7 @@ a, a:visited {
 /* inner appbar icon color */
 .win-commandlayout.win-appbar,
 .win-top.win-appbar {
-    background-color:hsl(213, 92%, 93%);
+    background-color:hsla(213, 92%, 93%, 0.95) !important;
     box-sizing:content-box;
 }
 .win-commandlayout.win-appbar {
@@ -163,7 +163,7 @@ a, a:visited {
 }
 .win-appbar {
     border-bottom: 3px solid hsl(213, 92%, 90%);
-    background-color:hsla(213, 92%, 93%, 0.98) !important;
+    background-color:hsla(213, 92%, 93%, 0.95) !important;
 }
 
 .win-commandimage {

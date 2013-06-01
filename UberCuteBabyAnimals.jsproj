@@ -61,9 +61,11 @@
     <Content Include="images\splashscreen.png" />
     <Content Include="images\storelogo.png" />
     <Content Include="images\widelogo.png" />
+    <Content Include="js\auth.js" />
     <Content Include="js\category_header.js" />
     <Content Include="js\data.js" />
     <Content Include="js\default.js" />
+    <Content Include="js\facebook.js" />
     <Content Include="js\pic.js" />
     <Content Include="js\livetile.js" />
     <Content Include="js\localstorage.js" />

@@ -27,14 +27,11 @@
 }
 
 .detail-item {
-    transition:all 0.1s ease-in;
-    transform:scale(1);
-    opacity:1;
+    
 }
 
 .detail-item.loading {
-    transform:scale(0.97);
-    opacity:0;
+    
 }
 
 .flip-container h1 {

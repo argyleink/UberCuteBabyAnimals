@@ -2,7 +2,7 @@
     
 }
 
-    .homelist.win-listview .win-item {
+    .homelist.win-listview .win-item.box {
         overflow:visible;
     }
 
@@ -38,12 +38,13 @@
         transform:scale(1);
     }
 
-        #filter_list > li:active {
+        #filter_list > li:active,
+        #filter_list > li:hover {
             transform:scale(0.98);
         }
 
 #filter_list h2 {
-    font-size:2.5rem;
+    font-size:2rem;
     font-weight:lighter;
     text-transform:capitalize;
 }
@@ -71,6 +72,7 @@
 figure {
     background-size:cover;
     background-position:center center;
+    border-radius:0.4rem;
 }
 
 .hometile {
@@ -107,7 +109,7 @@ figure {
     position:relative;
     background-color:hsl(213, 92%, 85%);
     color:white;
-    border-radius:0 0 0.4rem 0.4rem;
+    border-radius:0.4rem;
 }
 
     .first.group-tile:after {

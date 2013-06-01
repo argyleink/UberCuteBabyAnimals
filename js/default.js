@@ -12,7 +12,6 @@
             args.setPromise(WinJS.UI.processAll().then(function () {
                 return WinJS.Navigation.navigate(Application.navigator.home);
             }));
-
         }
     });
 
@@ -54,5 +53,6 @@
         var settingsPane = Windows.UI.ApplicationSettings.SettingsPane.getForCurrentView();
     }
 
+    oAuth.initialize();
     app.start();
 })();

@@ -15,6 +15,7 @@
 
             CategoryHeader.create(filter_list);
             this.initFlipview(options.item);
+            this.initLike();
         },
 
         initFlipview: function (item) {
@@ -83,14 +84,47 @@
                 var image = image = section.querySelector('img');
                 image.className = 'detail-item loading';
                 image.style.width = appwidth + 'px';
+                image.src = item.data.attachments[0].images.full.url;
 
-                Pic.load(item.data.attachments[0].images.full.url).then(function (src) {
-                    image.src = src;
-                    image.classList.remove('loading');
-                });
+                //Pic.load(item.data.attachments[0].images.full.url).then(function (src) {
+                //    image.src = src;
+                //    image.classList.remove('loading');
+                //});
 
                 return section;
             });
+        },
+
+        initLike: function () {
+            if (Facebook.isConnected) {
+                detail_appbar.winControl.showCommands([
+                    like.winControl
+                ]);
+                like.addEventListener('click', this.like);
+            }
+        },
+
+        like: function(e) {
+            var control = like.winControl;
+
+            if (control.label == 'Like') {
+                // set state to unlike but like the item
+                Facebook.like(item).then(
+                    function complete(result) {
+                        console.log('liked ' + item.title);
+
+                        control.label = 'Liked!';
+                        like.disabled = true;
+                    },
+                    function error(result) {
+                        control.label = 'Error..';
+                        console.log('error liking ' + item.title);
+                        setTimeout(function () {
+                            control.label = 'Like';
+                        }, 2000);
+                    }
+                );
+            }
         }
 
     });

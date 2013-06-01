@@ -108,6 +108,7 @@
                         height: boxHeight
                     });
 
+                    div.classList.add('box');
                     div.appendChild(seeAll);
                 }
                 else {
