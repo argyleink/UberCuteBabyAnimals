@@ -128,7 +128,7 @@ section[role=main] {
 
 /* custom scroll colors for touch only, looks better that way */
 body.touch {
-    -ms-scrollbar-base-color: hsl(213, 92%, 85%); 
+    -ms-scrollbar-base-color: #B3D4FC; 
 }
 
 a, a:visited {

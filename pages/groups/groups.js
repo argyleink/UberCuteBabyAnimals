@@ -5,6 +5,7 @@
       , appViewState        = Windows.UI.ViewManagement.ApplicationViewState
       , nav                 = WinJS.Navigation
       , ui                  = WinJS.UI
+      , searchPane          = Windows.ApplicationModel.Search.SearchPane.getForCurrentView()
       , grouplist
       , groupsezo
       , boundList
@@ -15,6 +16,8 @@
 
         ready: function (element, options) {
             this.page = element;
+            searchPane.placeholderText = 'puppies';
+
             this.setAppSize();
 
             Storage.session['home'] = Storage.session.home || {}; // init home session

@@ -1,14 +1,17 @@
-﻿.itemslist {
+﻿.itemslist,
+.searchlist {
     height:100%;
 }
 
-.itemslist .win-viewport {
+.itemslist .win-viewport,
+.searchlist .win-viewport {
     padding-left:120px;
     padding-top:2em;
     box-sizing:border-box;
 }
 
-.collection-tile {
+#resultslength {
+    font-size:0.5em;
 }
 
 @media screen and (-ms-view-state: snapped) {

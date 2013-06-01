@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Search</title>
+
+    <script src="/pages/search/search.js"></script>
+</head>
+<body>
+   <div class="search fragment">
+        <div id="group_top_appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement:'top', layout: 'custom'}">
+            <ul id="filter_list">
+                <li onclick="WinJS.Navigation.navigate(Application.navigator.home)">
+                    <figure class="category-image home"></figure>
+                    <h2>Home</h2>
+                </li>
+            </ul>
+        </div> 
+
+        <header aria-label="Header content" role="banner">
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle"></span>
+                <span id="resultslength"></span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <div id="search_list" class="searchlist win-selectionstylefilled" aria-label="List of this group's items" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'none' }"></div>
+        </section>
+    </div>
+</body>
+</html>

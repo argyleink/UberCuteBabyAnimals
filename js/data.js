@@ -219,6 +219,14 @@
         }
     }
 
+    function getItemsFromQuery(query) {
+        var query = RegExp(query, 'ig');
+
+        return babyGroupedList.createFiltered(function (item) {
+            return query.test(JSON.stringify(item));
+        });
+    }
+
     function isNewItem(item) {
         return babyList.indexOf(item) > 0 ? true : false;
     }
@@ -258,7 +266,8 @@
         getItemIndex: getItemIndex,
         resolveGroupReference: resolveGroupReference,
         resolveItemReference: resolveItemReference,
-        getWordpressJSON: getWordpressJSON
+        getWordpressJSON: getWordpressJSON,
+        getItemsFromQuery: getItemsFromQuery
     });
 
 })();

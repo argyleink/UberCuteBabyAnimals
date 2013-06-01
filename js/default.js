@@ -1,8 +1,9 @@
 ﻿(function () {
     "use strict";
 
-    var app         = WinJS.Application
-      , activation  = Windows.ApplicationModel.Activation;
+    var app             = WinJS.Application
+      , activation      = Windows.ApplicationModel.Activation
+      , searchPageURI   = '/pages/search/search.html';
 
     app.addEventListener("activated", function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
@@ -11,6 +12,18 @@
 
             args.setPromise(WinJS.UI.processAll().then(function () {
                 return WinJS.Navigation.navigate(Application.navigator.home);
+            }));
+        }
+        else if (args.detail.kind === activation.ActivationKind.search) {
+            args.setPromise(WinJS.UI.processAll().then(function () {
+                if (!WinJS.Navigation.location) {
+                    WinJS.Navigation.history.current = {
+                        location: Application.navigator.home, initialState: {}
+                    };
+                }
+                return WinJS.Navigation.navigate(searchPageURI, {
+                    queryText: args.detail.queryText
+                });
             }));
         }
     });
