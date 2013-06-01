@@ -20,19 +20,53 @@
     display:-ms-flexbox;
     -ms-flex-wrap:nowrap;
     margin:0;
+    padding:0 1rem;
+    box-sizing:border-box;
 
     overflow-x:auto;
     overflow-y:hidden;
 }
 
-#filter_list > dt {
-    font-size:3em;
-    font-weight:lighter;
-    cursor:pointer;
+    #filter_list > li {
+        display:inline-block;
+        cursor:pointer;
+        margin:1rem;
+        width:175px;
+        text-align:center;
 
-    display:inline-block;
-    padding:3rem;
+        transition:all 0.1s ease-out;
+        transform:scale(1);
+    }
+
+        #filter_list > li:active {
+            transform:scale(0.98);
+        }
+
+#filter_list h2 {
+    font-size:2.5rem;
+    font-weight:lighter;
+    text-transform:capitalize;
 }
+
+.category-image {
+    display:inline-block;
+    height:100px;
+    width:100px;
+
+    border-radius:50%;
+    border:3px solid hsl(213, 92%, 85%);
+}
+
+    .category-image.home:after {
+        content:"\E10F";
+        font-family:'Segoe UI Symbol';
+        font-size:4rem;
+        color:hsl(213, 92%, 75%);
+
+        position:relative;
+        left:1px;
+        top:5px;
+    }
 
 figure {
     background-size:cover;

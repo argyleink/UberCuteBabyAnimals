@@ -8,8 +8,13 @@
 </head>
 <body>
    <div class="collection fragment">
-       <div id="group_top_appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement:'top', layout: 'custom'}">
-            <dl id="filter_list"></dl>
+        <div id="group_top_appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement:'top', layout: 'custom'}">
+            <ul id="filter_list">
+                <li onclick="WinJS.Navigation.navigate(Application.navigator.home)">
+                    <figure class="category-image home"></figure>
+                    <h2>Home</h2>
+                </li>
+            </ul>
         </div> 
 
         <header aria-label="Header content" role="banner">

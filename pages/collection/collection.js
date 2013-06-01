@@ -23,7 +23,7 @@
             listView.itemTemplate = this.itemRenderer;
             listView.oniteminvoked = this._itemInvoked.bind(this);
 
-            this.populateHeader();
+            CategoryHeader.create(filter_list);
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
         },
 
@@ -57,24 +57,6 @@
             } else {
                 listView.layout = new ui.GridLayout({ groupHeaderPosition: "left" });
             }
-        },
-
-        populateHeader: function() {
-            var cats = Data.categories()
-              , pool = document.createDocumentFragment();
-
-            for (var i = 0, l = cats.length; i < l; i++) {
-                var cat = document.createElement('dt');
-                cat.textContent = cats[i];
-                //cat.style.backgroundColor = 'hsl(213, 92%, ' + (85 + i) + '%)';
-                pool.appendChild(cat);
-            }
-
-            filter_list.appendChild(pool);
-
-            filter_list.addEventListener('click', function (e) {
-                WinJS.Navigation.navigate("/pages/collection/collection.html", { groupKey: e.srcElement.textContent });
-            }.bind(this));
         },
 
         _itemInvoked: function (args) {

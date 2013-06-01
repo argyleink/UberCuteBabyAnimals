@@ -68,7 +68,13 @@
             item.categories[0].image = item.attachments[0].images.large.url;
 
             babyList.push(item);
-            !categoryContains(item.categories[0].slug) && categories.push(item.categories[0].slug);
+
+            if (!categoryContains(item.categories[0].slug)) {
+                categories.push({
+                    slug: item.categories[0].slug, 
+                    image: item.attachments[0].images.medium.url
+                });
+            }
 
             // make 5 live tiles
             if (itemCount < 5) {
@@ -220,7 +226,7 @@
     function categoryContains(item) {
         var i = categories.length;
         while (i--)
-            if (categories[i] === item) return true;
+            if (categories[i].slug === item) return true;
         return false;
     }
 

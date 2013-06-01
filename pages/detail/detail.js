@@ -12,6 +12,8 @@
         ready: function (element, options) {
             item = options && options.item ? Data.resolveItemReference(options.item) : Data.items.getAt(0);
             this.setAppSize();
+
+            CategoryHeader.create(filter_list);
             this.initFlipview(options.item);
         },
 

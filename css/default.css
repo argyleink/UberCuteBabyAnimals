@@ -149,8 +149,7 @@ a, a:visited {
 }
 
 .win-label {
-    color:hsl(213, 92%, 70%);
-    font-size:1.2rem;
+    color:hsl(213, 85%, 70%);
 }
 
 /* inner appbar icon color */
@@ -162,9 +161,9 @@ a, a:visited {
 .win-commandlayout.win-appbar {
     border-top: 3px solid hsl(213, 92%, 90%);
 }
-.win-top.win-appbar {
+.win-appbar {
     border-bottom: 3px solid hsl(213, 92%, 90%);
-    background-color:hsla(213, 92%, 93%, 0.99);
+    background-color:hsla(213, 92%, 93%, 0.98) !important;
 }
 
 .win-commandimage {
@@ -172,7 +171,7 @@ a, a:visited {
 }
 
     .win-backbutton:hover {
-        background-color:hsl(213, 92%, 80%) !important;
+        background-color:hsl(213, 72%, 70%) !important;
         color:hsl(213, 92%, 95%) !important;
 
         transition:all 0.1s ease-out;
@@ -180,7 +179,7 @@ a, a:visited {
     }
 
     .win-backbutton:active {
-        border-color:hsl(213, 92%, 75%) !important;
+        border-color:hsl(213, 92%, 55%) !important;
         color:hsl(213, 92%, 95%) !important;
         
         transition:all 0.1s ease-out;

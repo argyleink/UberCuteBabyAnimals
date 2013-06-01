@@ -9,9 +9,15 @@
 <body>
     
     <div id="detail_top_appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement:'top', layout: 'custom'}">
-        <header aria-label="Navigation bar" role="banner" style="height:250px">
-            <button id="cmdBack" class="win-backbutton top-bar" aria-label="Back"></button>
-        </header>
+        <ul id="filter_list">
+            <li>
+                <button id="cmdBack" class="win-backbutton top-bar" aria-label="Back"></button>
+            </li>
+            <li onclick="WinJS.Navigation.navigate(Application.navigator.home)">
+                <figure class="category-image home"></figure>
+                <h2>Home</h2>
+            </li>
+        </ul>
     </div> 
 
     <div class="itemdetailpage fragment">
