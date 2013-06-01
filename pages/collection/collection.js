@@ -89,8 +89,14 @@
                 var div = document.createElement('div')
                   , figure = document.createElement('figure');
 
-                figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.large.url + ')';
-                figure.className = 'item';
+                div.className = 'item';
+
+                Pic.load(item.data.attachments[0].images.medium.url).then(function (src) {
+                    figure.style.backgroundImage = 'url(' + src + ')';
+                    figure.classList.remove('loading');
+                });
+
+                figure.className = 'collection-tile loading';
                 figure.style.height = (appheight / 2) + 'px';
                 figure.style.width = (appheight / 2) + 'px';
 

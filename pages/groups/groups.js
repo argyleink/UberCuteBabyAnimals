@@ -75,7 +75,7 @@
             groupsezo = group_sezo.winControl;
             groupsezo.selectionMode = 'none';
             
-            this.populateHeader();
+            CategoryHeader.create(filter_list, this.navigateToGroup);
             this.updateLayout();
         },
 
@@ -90,30 +90,12 @@
             }.bind(this));
         },
 
-        populateHeader: function() {
-            var cats = Data.categories()
-              , pool = document.createDocumentFragment();
-
-            for (var i = 0, l = cats.length; i < l; i++) {
-                var cat = document.createElement('dt');
-                cat.textContent = cats[i];
-                //cat.style.backgroundColor = 'hsl(213, 92%, '+ (85 + i) +'%)';
-                pool.appendChild(cat);
-            }
-
-            filter_list.appendChild(pool);
-
-            filter_list.addEventListener('click', function (e) {
-                this.navigateToGroup(e.srcElement.textContent);
-            }.bind(this));
-        },
-
         itemRenderer: function(itemPromise) {
             return itemPromise.then(function (item) {
                 var div = document.createElement('div')
                   , figure = document.createElement('figure');
 
-                div.className = 'item' + item.data.catIndex;
+                div.className = 'item';
 
                 if (item.data.box) {
                     var boxHeight = (appheight / 2) - 10;
@@ -149,13 +131,17 @@
 
                 div.appendChild(figure);
 
+                Pic.load(item.data.attachments[0].images.large.url).then(function (src) {
+                    figure.style.backgroundImage = 'url(' + src + ')';
+                    figure.classList.remove('loading');
+                });
+
                 return div;
             }.bind(this));
         },
 
-        setItemAttributes: function(figure, item) {
-            figure.style.backgroundImage = 'url(' + item.data.attachments[0].images.large.url + ')';
-            figure.className = 'hometile';
+        setItemAttributes: function (figure, item) {
+            figure.className = 'hometile loading';
             figure.setAttribute('data-title', item.data.title);
             figure.setAttribute('data-all-index', item.data.allIndex);
         },
@@ -271,13 +257,15 @@
                 this.navigateToGroup(group.key);
             }
             else if (args.detail.itemPromise._value.data.box) {
+                Storage.session.home.index = args.detail.itemIndex;
                 this.navigateToGroup(args.detail.itemPromise._value.data.categories[0].slug);
             }
             else {
+                Storage.session.home.index = args.detail.itemIndex;
+
                 // var item = boundList.getAt(args.detail.itemIndex);
                 var idx = parseInt(args.srcElement.querySelector('figure').getAttribute('data-all-index'))
                 var item = Data.items.getAt(idx);
-                Storage.session.home.index = args.detail.itemIndex;
 
                 nav.navigate("/pages/detail/detail.html", {
                     item: item,

@@ -226,7 +226,7 @@
 
     function getWordpressJSON() {
         return new WinJS.xhr({
-            url: 'http://dork.local/ubercute/?json=1'
+            url: 'http://www.argyleink.com/babyanimals/?json=1'
           , type: 'GET'
           , responseType: 'json'
         });

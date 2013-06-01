@@ -61,11 +61,11 @@ figure {
     display:inline-block;
     margin-right:1rem;
     font-weight:normal;
-    color:hsl(213, 92%, 85%);
+    color:hsl(213, 92%, 80%);
 }
 
-.home-header span:before {
-    content:"see all ";
+.item {
+    -ms-perspective:500px;
 }
 
 .group-tile {

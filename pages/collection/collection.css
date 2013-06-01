@@ -8,8 +8,7 @@
     box-sizing:border-box;
 }
 
-.item {
-    
+.collection-tile {
 }
 
 @media screen and (-ms-view-state: snapped) {

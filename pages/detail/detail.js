@@ -79,11 +79,13 @@
                 section.querySelector('h1').textContent = item.data.title;
 
                 var image = image = section.querySelector('img');
+                image.className = 'detail-item loading';
                 image.style.width = appwidth + 'px';
-                image.src = item.data.attachments[0].images.full.url;
-                image.onload = function (e) {
-                    e.srcElement.className = "";
-                };
+
+                Pic.load(item.data.attachments[0].images.full.url).then(function (src) {
+                    image.src = src;
+                    image.classList.remove('loading');
+                });
 
                 return section;
             });

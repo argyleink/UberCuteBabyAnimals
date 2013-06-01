@@ -26,8 +26,19 @@
     width:100%;
 }
 
+.detail-item {
+    transition:all 0.1s ease-in;
+    transform:scale(1);
+    opacity:1;
+}
+
+.detail-item.loading {
+    transform:scale(0.97);
+    opacity:0;
+}
+
 .flip-container h1 {
-    color:hsl(0, 0%, 99%);
+    color:hsl(0, 0%, 98%);
     text-shadow:1px 1px 0 rgba(0,0,0,0.5);
 }
 
@@ -59,5 +70,6 @@
     }
         .flip-container > figcaption {
             position:relative;
+            top:0;
         }
 }

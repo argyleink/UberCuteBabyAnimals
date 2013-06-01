@@ -19,7 +19,16 @@ body {
 figure {
     margin:0;
     padding:0;
+
+    transform-origin:left center;
+    transition:all 0.3s ease-out;
+    transform:rotateY(0deg);
 }
+
+    figure.loading {
+        transform:rotateY(100deg);
+        opacity:0;
+    }
 
 img {
     max-width:100%;
