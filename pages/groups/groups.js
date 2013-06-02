@@ -266,10 +266,13 @@
             else if (args.detail.itemPromise._value.data.box) {
                 Storage.session.home.index = args.detail.itemIndex;
 
-                nav.navigate("/pages/collection/collection.html", {
-                    groupKey: args.detail.itemPromise._value.data.categories[0].slug,
-                    group: args.detail.itemPromise._value.data.title
-                });
+                if (args.detail.itemPromise._value.data.count > 0 || Data.getCategory(args.detail.itemPromise._value.data.categories[0].slug).newCount) {
+                    nav.navigate("/pages/collection/collection.html", {
+                        groupKey: args.detail.itemPromise._value.data.categories[0].slug,
+                        group: args.detail.itemPromise._value.data.title
+                    });
+                }
+                
             }
             else {
                 Storage.session.home.index = args.detail.itemIndex;
