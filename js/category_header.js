@@ -4,7 +4,7 @@
     var cats = Data.categories()
       , pool;
 
-    function create(elem, clicked) {
+    function create(elem, current) {
         pool = document.createDocumentFragment();
 
         for (var i = 0, l = cats.length; i < l; i++) {
@@ -14,6 +14,8 @@
                 img = document.createElement('figure');
 
             wrap.setAttribute('data-category', category.slug);
+
+            if (current == category.slug) cat.className = 'cur';
             cat.textContent = category.slug;
 
             img.className = 'category-image';

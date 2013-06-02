@@ -93,9 +93,8 @@ section[role=main] {
     }
 
 .pagetitle {
-    color: hsl(213, 92%, 85%);
+    color:hsl(213, 75%, 60%);
     text-transform:capitalize;
-    font-weight:normal;
 }
 
     .pagetitle > img {
@@ -157,6 +156,9 @@ a, a:visited {
 .win-top.win-appbar {
     background-color:hsla(213, 92%, 93%, 0.95) !important;
     box-sizing:content-box;
+}
+.win-appbar.win-bottom {
+    background-color:hsla(213, 100%, 100%, 0.95) !important;
 }
 .win-commandlayout.win-appbar {
     border-top: 3px solid hsl(213, 92%, 90%);

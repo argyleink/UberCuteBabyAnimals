@@ -29,6 +29,7 @@
 
     #filter_list > li {
         display:inline-block;
+        position:relative;
         cursor:pointer;
         margin:1rem;
         width:175px;
@@ -40,7 +41,7 @@
 
         #filter_list > li:active,
         #filter_list > li:hover {
-            transform:scale(0.98);
+            transform:scale(0.90);
         }
 
 #filter_list h2 {
@@ -48,6 +49,11 @@
     font-weight:lighter;
     text-transform:capitalize;
 }
+
+    #filter_list h2.cur {
+        color:hsl(213, 75%, 60%);
+        font-weight:normal;
+    }
 
 .category-image {
     display:inline-block;

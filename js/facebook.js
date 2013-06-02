@@ -19,13 +19,13 @@
                 }
                 else {
                     console.log('user data set: ' + val);
+                    this.isConnected = true;
                     //Facebook.setUser();
-                    Facebook.connected = true;
                 }
             }
         },
 
-        isConnected: null,
+        isConnected: false,
         connected: {
             get: function () {
                 return this.isConnected;

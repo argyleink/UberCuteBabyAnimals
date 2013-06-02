@@ -13,7 +13,7 @@
             item = options.item;
             this.setAppSize();
 
-            CategoryHeader.create(filter_list);
+            CategoryHeader.create(filter_list, item.categories[0].slug);
 
             this.initFlipview(options.index);
             this.initLike();
@@ -121,16 +121,19 @@
         },
 
         initLike: function () {
-            if (Facebook.isConnected) {
-                detail_appbar.winControl.showCommands([
+            if (Facebook.isConnected == true) {
+                like.addEventListener('click', this.like);
+            }
+            else {
+                detail_appbar.winControl.hideCommands([
                     like.winControl
                 ]);
-                like.addEventListener('click', this.like);
             }
         },
 
         like: function(e) {
-            var control = like.winControl;
+            var control = like.winControl,
+                errors = 0;
 
             if (control.label == 'Like') {
                 // set state to unlike but like the item
@@ -148,11 +151,11 @@
                         });
                     },
                     function error(result) {
-                        control.label = 'Error..';
+                        control.label = 'Error, try again.';
                         console.log('error liking ' + item.title);
                         setTimeout(function () {
                             control.label = 'Like';
-                        }, 2000);
+                        }, 3000);
                     }
                 );
             }

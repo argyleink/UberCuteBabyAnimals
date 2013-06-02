@@ -30,7 +30,7 @@
             listView.itemTemplate = this.itemRenderer;
             listView.oniteminvoked = this._itemInvoked.bind(this);
 
-            CategoryHeader.create(filter_list);
+            CategoryHeader.create(filter_list, group);
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
         },
 

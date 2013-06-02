@@ -92,10 +92,6 @@
                     console.log('local auth token created');
                     tokenFile = file;
                     e('no authentication token');
-                    YeahToast.show({
-                        title: "Now you can Like stuff!",
-                        textContent: "Sign in to Facebook from the Charms Bar. (swipe from the right edge)"
-                    });
                 });
             });
         });
@@ -104,6 +100,8 @@
     function authenticate() {
         getToken().then(function success() {
             //authenticated
+
+            Facebook.connected = true;
             setUserData();
         }, function error(e) {
             launchFacebookWebAuth();
@@ -190,6 +188,11 @@
         },
         function () {
             addSettingsFlyout();
+
+            YeahToast.show({
+                title: "Now you can Like stuff!",
+                textContent: "Sign in to Facebook from the Charms Bar. (swipe from the right edge, choose Settings)"
+            });
         });
     }
 
