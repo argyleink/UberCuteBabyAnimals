@@ -168,6 +168,10 @@
             }
             else {
                 if (cat.cur >= 4) {
+                    item.catIndex = cat.cur;
+                    item.allIndex = index;
+
+                    cat.cur += 1;
                     return;
                 }
                 cat.cur += 1;

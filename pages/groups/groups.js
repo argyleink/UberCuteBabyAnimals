@@ -148,7 +148,7 @@
         },
 
         setItemAttributes: function (figure, item) {
-            figure.className = 'hometile loading';
+            figure.className = item.data.new ? 'hometile new loading' : 'hometile loading';
             figure.setAttribute('data-title', item.data.title);
             figure.setAttribute('data-all-index', item.data.allIndex);
         },
@@ -265,7 +265,11 @@
             }
             else if (args.detail.itemPromise._value.data.box) {
                 Storage.session.home.index = args.detail.itemIndex;
-                this.navigateToGroup(args.detail.itemPromise._value.data.categories[0].slug);
+
+                nav.navigate("/pages/collection/collection.html", {
+                    groupKey: args.detail.itemPromise._value.data.categories[0].slug,
+                    group: args.detail.itemPromise._value.data.title
+                });
             }
             else {
                 Storage.session.home.index = args.detail.itemIndex;
@@ -276,7 +280,7 @@
 
                 nav.navigate("/pages/detail/detail.html", {
                     item: item,
-                    index: args.detail.itemIndex
+                    index: item.catIndex
                 });
             }
         },

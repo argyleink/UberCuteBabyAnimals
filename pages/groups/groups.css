@@ -80,6 +80,20 @@ figure {
     width:600px;
 }
 
+    .new:after {
+        content:"NEW";
+        width:120px;
+        position:absolute;
+        bottom:10px;
+        left:-38px;
+        padding:3px;
+        color:hsl(213, 80%, 60%);
+        background-color:#efefef;
+        text-align:center;
+        box-shadow:0 0 0 3px hsl(213, 92%, 85%);
+        transform:rotate(45deg);
+    }
+
     .homelist .win-viewport {
         padding-left:120px;
         box-sizing:border-box;

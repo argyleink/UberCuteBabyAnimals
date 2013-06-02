@@ -10,12 +10,12 @@
     WinJS.UI.Pages.define("/pages/detail/detail.html", {
         
         ready: function (element, options) {
-            item = options && options.item ? Data.resolveItemReference(options.item) : Data.items.getAt(0);
+            item = options.item;
             this.setAppSize();
 
             CategoryHeader.create(filter_list);
 
-            this.initFlipview();
+            this.initFlipview(options.index);
             this.initLike();
             this.initAppbar();
 
@@ -23,18 +23,24 @@
             App.Share.data(item);
         },
 
-        initFlipview: function () {
+        initFlipview: function (idx) {
             flipview = detail_flipview.winControl;
 
             flipview.itemTemplate = this.renderer;
             flipview.itemDataSource = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
-            flipview.currentPage = item.catIndex - 1 || 0;
+            flipview.currentPage = idx || 0;
             flipview.onpagecompleted = function (e) {
                 var curItem = detail_flipview.winControl.itemDataSource.itemFromIndex(detail_flipview.winControl.currentPage)._value.data;
-                Storage.viewImage(curItem.id);
-                if (Data.getCategory(curItem.categories[0].slug).newCount) {
-                    Data.getCategory(curItem.categories[0].slug).newCount -= 1;
+                
+                if (curItem.new) {
+                    Storage.viewImage(curItem.id);
+                    curItem.new = false;
+
+                    if (Data.getCategory(curItem.categories[0].slug).newCount) {
+                        Data.getCategory(curItem.categories[0].slug).newCount -= 1;
+                    }
                 }
+                
             };
 
             detail_flipview.focus();
@@ -108,11 +114,9 @@
         },
 
         initAppbar: function() {
-            tester.onclick = function () {
-                YeahToast.show({
-                    imgsrc: item.attachments[0].images.thumbnail.url,
-                    title: "Liked!"
-                });
+            link.onclick = function () {
+                var uri = new Windows.Foundation.Uri('http://www.argyleink.com/babyanimals/' + item.slug);
+                Windows.System.Launcher.launchUriAsync(uri);
             }
         },
 
@@ -137,7 +141,11 @@
                         control.label = 'Liked!';
                         like.disabled = true;
 
-
+                        YeahToast.show({
+                            imgsrc: item.attachments[0].images.thumbnail.url,
+                            title: "Success!",
+                            textContent: item.title + " just got a little cuter."
+                        });
                     },
                     function error(result) {
                         control.label = 'Error..';

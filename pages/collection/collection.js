@@ -3,7 +3,9 @@
 
     var appViewState = Windows.UI.ViewManagement.ApplicationViewState
       , ui = WinJS.UI
-      , appheight = window.innerHeight - 220;
+      , appheight = window.innerHeight - 220
+      , pageList
+      , sorted = false;
 
     ui.Pages.define("/pages/collection/collection.html", {
         _items: null,
@@ -11,11 +13,16 @@
         ready: function (element, options) {
             var listView = element.querySelector(".itemslist").winControl;
             var group = options.groupKey;
+
             this._items = Data.getItemsFromGroup(group);
-            var pageList = this._items.createGrouped(
-                function groupKeySelector(item) { return group.key; },
-                function groupDataSelector(item) { return group; }
-            );
+            pageList = this._items;
+
+            if (options.group === 'New') {
+                pageList = pageList.createFiltered(function (item) {
+                    return item.new;
+                });
+                sorted = true;
+            }
 
             element.querySelector("header[role=banner] .pagetitle").textContent = group;
 
@@ -60,10 +67,12 @@
         },
 
         _itemInvoked: function (args) {
-            var item = this._items.getAt(args.detail.itemIndex);
-            item = Data.resolveItemReference(item);
-            var index = Data.getItemIndex(item);
-            WinJS.Navigation.navigate("/pages/detail/detail.html", { item: item, index: index });
+            var item = pageList.getAt(args.detail.itemIndex);
+
+            WinJS.Navigation.navigate("/pages/detail/detail.html", {
+                item: item,
+                index: item.catIndex
+            });
         },
 
         itemRenderer: function (itemPromise) {
@@ -78,7 +87,7 @@
                     figure.classList.remove('loading');
                 });
 
-                figure.className = 'collection-tile loading';
+                figure.className = item.data.new ? 'collection-tile new loading' : 'collection-tile loading';
                 figure.style.height = (appheight / 2) + 'px';
                 figure.style.width = (appheight / 2) + 'px';
 

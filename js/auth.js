@@ -92,6 +92,10 @@
                     console.log('local auth token created');
                     tokenFile = file;
                     e('no authentication token');
+                    YeahToast.show({
+                        title: "Now you can Like stuff!",
+                        textContent: "Sign in to Facebook from the Charms Bar. (swipe from the right edge)"
+                    });
                 });
             });
         });
