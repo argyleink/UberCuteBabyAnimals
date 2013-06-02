@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="UberCuteBabyAnimals" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="UberCuteBabyAnimals" ForegroundText="dark" BackgroundColor="#EEEEEE">
+      <VisualElements DisplayName="UberCuteBabyAnimals" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="UberCuteBabyAnimals" ForegroundText="dark" BackgroundColor="#EEEEEE" ToastCapable="true">
         <DefaultTile ShowName="noLogos" WideLogo="images/widelogo.png" ShortName="Baby Animals" />
         <SplashScreen Image="images\splashscreen.png" BackgroundColor="#EEEEEE" />
       </VisualElements>

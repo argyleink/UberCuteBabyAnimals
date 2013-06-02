@@ -71,6 +71,7 @@
     <Content Include="js\localstorage.js" />
     <Content Include="js\navigator.js" />
     <Content Include="js\share.js" />
+    <Content Include="js\YeahToast.js" />
     <Content Include="pages\search\search.html" />
     <Content Include="pages\search\search.js" />
     <Content Include="pages\detail\detail.css" />

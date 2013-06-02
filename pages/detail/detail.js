@@ -14,15 +14,16 @@
             this.setAppSize();
 
             CategoryHeader.create(filter_list);
-            this.initFlipview(options.item);
+
+            this.initFlipview();
             this.initLike();
             this.initAppbar();
 
             App.Share.enable();
-            App.Share.data(options.item);
+            App.Share.data(item);
         },
 
-        initFlipview: function (item) {
+        initFlipview: function () {
             flipview = detail_flipview.winControl;
 
             flipview.itemTemplate = this.renderer;
@@ -107,7 +108,12 @@
         },
 
         initAppbar: function() {
-            
+            tester.onclick = function () {
+                YeahToast.show({
+                    imgsrc: item.attachments[0].images.thumbnail.url,
+                    title: "Liked!"
+                });
+            }
         },
 
         initLike: function () {
@@ -130,6 +136,8 @@
 
                         control.label = 'Liked!';
                         like.disabled = true;
+
+
                     },
                     function error(result) {
                         control.label = 'Error..';
