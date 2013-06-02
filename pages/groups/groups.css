@@ -96,8 +96,25 @@ figure {
 .home-header h1 {
     display:inline-block;
     margin-right:1rem;
-    font-weight:normal;
-    color:hsl(213, 92%, 80%);
+    color:hsl(213, 75%, 60%);
+}
+
+.hero-title {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding:1rem 2rem;
+    box-sizing:border-box;
+    color:hsl(0, 0%, 98%);
+    text-shadow:1px 1px 0 rgba(0,0,0,0.5);
+
+    transition:all 0.15s ease-out 1.5s;
+}
+
+.loading .hero-title {
+    transform:translateY(-5px);
+    opacity:0;
 }
 
 .item {
@@ -156,13 +173,13 @@ figure {
     
     background-color:hsl(213, 92%, 85%);
     border-bottom:0.4rem solid hsl(213, 92%, 75%);
-    border-radius:0 0 0.4rem 0.4rem;
+    border-radius:0.4rem;
 }
 
 .sezo-item > figure {
     width:100%;
     height:calc(100% - 90px);
-    border-bottom:5px solid hsl(213, 92%, 75%);
+    border-radius:0;
 }
 
     .sezo-item h1 {

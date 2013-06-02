@@ -88,9 +88,7 @@
         },
 
         appbarInit: function() {
-            group_toggle.addEventListener('click', function (e) {
-                this.seeAll();
-            }.bind(this));
+            
         },
 
         itemRenderer: function(itemPromise) {
@@ -130,6 +128,10 @@
                         default:
                             figure.style.height = appheight + 'px';
                             figure.style.width = appheight + 'px';
+                            var title = document.createElement('h1');
+                            title.className = 'hero-title';
+                            title.textContent = item.data.title;
+                            figure.appendChild(title);
                             break;
                     }
                 }

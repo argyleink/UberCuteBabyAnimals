@@ -26,7 +26,7 @@
         return item.categories[0];
     }
 
-    function getGroupKey(leftKey, rightKey) {
+    function sortGroupAscending(leftKey, rightKey) {
         var deep
           , left = 0
           , right = 0;
@@ -53,9 +53,39 @@
         return left - right;
     }
 
+    function sortDescending(leftKey, rightKey) {
+        var deep
+          , left = 0
+          , right = 0;
+
+        leftKey = leftKey.title;
+        rightKey = rightKey.title;
+
+        if (leftKey === rightKey)
+            return 0;
+
+        if (leftKey[0] === rightKey[0]) deep = 1;
+        if (deep === 1 && leftKey[1] === rightKey[1]) deep = 2;
+        if (deep === 2 && leftKey[2] === rightKey[2]) deep = 3;
+        if (deep === 3 && leftKey[3] === rightKey[3]) deep = 4;
+        if (deep === 4 && leftKey[40] === rightKey[4]) deep = 5;
+
+        if (deep === 0)
+            return leftKey[0] - rightKey[0];
+        if (!deep)
+            return leftKey[0] - rightKey[0];
+
+        for (var i = 0; i <= deep; i++) {
+            left += leftKey[i];
+            right += rightKey[i];
+        }
+
+        return right - left;
+    }
+
     // init group lists
-    babyGroupedList = babyList.createGrouped(groupKeySelector, groupDataSelector, getGroupKey);
-    homeGroupedList = homeList.createGrouped(groupKeySelector, groupDataSelector, getGroupKey);
+    babyGroupedList = babyList.createGrouped(groupKeySelector, groupDataSelector, sortGroupAscending);
+    homeGroupedList = homeList.createGrouped(groupKeySelector, groupDataSelector, sortGroupAscending);
 
     function dataRecieved(data) {
         var itemCount = 0;
@@ -229,6 +259,14 @@
         }
     }
 
+    function getDescendingSortedList() {
+        return babyGroupedList.createSorted(sortDescending);
+    }
+
+    function getAscendingSortedList() {
+        return babyGroupedList.createSorted(sortAscending);
+    }
+
     function getItemIndex(reference) {
         for (var i = 0; i < babyGroupedList.length; i++) {
             var item = babyGroupedList.getAt(i);
@@ -284,6 +322,8 @@
         getItemReference: getItemReference,
         getItemsFromGroup: getItemsFromGroup,
         getItemIndex: getItemIndex,
+        getDescendingList: getDescendingSortedList,
+        getAscendingList: getAscendingSortedList,
         resolveGroupReference: resolveGroupReference,
         resolveItemReference: resolveItemReference,
         getWordpressJSON: getWordpressJSON,

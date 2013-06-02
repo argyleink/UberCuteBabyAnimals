@@ -16,6 +16,7 @@
             CategoryHeader.create(filter_list);
             this.initFlipview(options.item);
             this.initLike();
+            this.initAppbar();
 
             App.Share.enable();
             App.Share.data(options.item);
@@ -28,9 +29,12 @@
             flipview.itemDataSource = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
             flipview.currentPage = item.catIndex - 1 || 0;
             flipview.onpagecompleted = function (e) {
-                Storage.viewImage(this.id);
-                Data.getCategory(this.categories[0].slug).newCount -= 1;
-            }.bind(item)
+                var curItem = detail_flipview.winControl.itemDataSource.itemFromIndex(detail_flipview.winControl.currentPage)._value.data;
+                Storage.viewImage(curItem.id);
+                if (Data.getCategory(curItem.categories[0].slug).newCount) {
+                    Data.getCategory(curItem.categories[0].slug).newCount -= 1;
+                }
+            };
 
             detail_flipview.focus();
         },
@@ -100,6 +104,10 @@
 
                 return section;
             });
+        },
+
+        initAppbar: function() {
+            
         },
 
         initLike: function () {

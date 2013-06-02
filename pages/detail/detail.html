@@ -28,10 +28,13 @@
 
     <div id="detail_appbar" data-win-control="WinJS.UI.AppBar">
         <button data-win-control="WinJS.UI.AppBarCommand" 
-            data-win-options="{id:'save', label:'Save Image', icon:'save'}" type="button">
+            data-win-options="{id:'link', label:'Open Link', icon:'go', section:'selection'}" type="button">
         </button>
         <button data-win-control="WinJS.UI.AppBarCommand" 
-            data-win-options="{id:'like', label:'Like', icon:'like'}" type="button">
+            data-win-options="{id:'save', label:'Save Image', icon:'savelocal', section:'selection'}" type="button">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'like', label:'Like', icon:'like', section:'selection'}" type="button">
         </button>
     </div> 
 </body>

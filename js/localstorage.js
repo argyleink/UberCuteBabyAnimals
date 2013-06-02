@@ -71,9 +71,11 @@
     }
 
     function viewImage(id) {
-        if (!hasViewedImage(id)) {
-            localStorage.writeText(id, "true");
-        }
+        hasViewedImage(id).done(function (result) {
+            if (result == false) {
+                localStorage.writeText(id, "true");
+            }
+        });
     }
 
     function hasViewedImage(id) {
