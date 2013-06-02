@@ -71,7 +71,7 @@
 
             WinJS.Navigation.navigate("/pages/detail/detail.html", {
                 item: item,
-                index: item.catIndex
+                index: item.catIndex - 1
             });
         },
 

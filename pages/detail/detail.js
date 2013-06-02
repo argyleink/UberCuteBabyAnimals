@@ -122,7 +122,7 @@
 
         initLike: function () {
             if (Facebook.isConnected == true) {
-                like.addEventListener('click', this.like);
+                like.addEventListener('click', this.like.bind(this));
             }
             else {
                 detail_appbar.winControl.hideCommands([
@@ -132,32 +132,48 @@
         },
 
         like: function(e) {
-            var control = like.winControl,
-                errors = 0;
-
-            if (control.label == 'Like') {
-                // set state to unlike but like the item
+            if (like.winControl.label == 'Like') {
                 Facebook.like(item).then(
-                    function complete(result) {
-                        console.log('liked ' + item.title);
-
-                        control.label = 'Liked!';
-                        like.disabled = true;
-
-                        YeahToast.show({
-                            imgsrc: item.attachments[0].images.thumbnail.url,
-                            title: "Success!",
-                            textContent: item.title + " just got a little cuter."
-                        });
-                    },
-                    function error(result) {
-                        control.label = 'Error, try again.';
-                        console.log('error liking ' + item.title);
-                        setTimeout(function () {
-                            control.label = 'Like';
-                        }, 3000);
-                    }
+                    this.likeCompleted.bind(this),
+                    this.likeFailed.bind(this)
                 );
+            }
+        },
+
+        likeCompleted: function complete(result) {
+            like.winControl.label = 'Liked!';
+            like.disabled = true;
+            this.likeTries = 0;
+
+            YeahToast.show({
+                imgsrc: item.attachments[0].images.thumbnail.url,
+                title: "Success!",
+                textContent: item.title + " just got a little cuter."
+            });
+        },
+
+        likeTries: 0,
+        likeFailed: function error(result) {
+            if (result.responseText.indexOf('#3501') > 0) {
+                like.winControl.label = 'Already Liked';
+                this.likeTries = 0;
+
+                setTimeout(function () {
+                    like.winControl.label = 'Liked!';
+                    like.disabled = true;
+                }, 2000);
+            }
+            else if (this.likeTries < 2) {
+                this.like();
+                this.likeTries++;
+            }
+            else {
+                like.winControl.label = 'Error, try again.';
+                this.likeTries = 0;
+
+                setTimeout(function () {
+                    like.winControl.label = 'Like';
+                }, 2000);
             }
         }
 

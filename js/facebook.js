@@ -54,7 +54,6 @@
 
         like: function (options) {
             console.info('liking ' + options.title);
-            var that = this;
 
             return new WinJS.xhr({
                 type: 'POST',
@@ -63,7 +62,6 @@
                      '&method=POST' + 
                      '&object=' + encodeURIComponent(options.url)
             });
-
         },
 
         unlike: function (options) {
