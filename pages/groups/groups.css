@@ -48,11 +48,13 @@
     font-size:2rem;
     font-weight:lighter;
     text-transform:capitalize;
+    padding-bottom:0.5rem;
 }
 
     #filter_list h2.cur {
         color:hsl(213, 75%, 60%);
         font-weight:normal;
+        border-bottom:3px solid hsl(213, 84%, 75%);
     }
 
 .category-image {

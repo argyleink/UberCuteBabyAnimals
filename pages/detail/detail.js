@@ -77,20 +77,17 @@
                     <figure class="image-wrapper"> \
                         <img class="loading" /> \
                     </figure> \
-                ';
-                /*
-                <article> \
-                        <section> \
-                            <h2>Fun Fact</h2> \
+                <article class="metadata"> \
+                        <section class="flex-center"> \
+                            <h2>Fact</h2> \
                             <blockquote> \
                                 Cats, especially young kittens, are known for their love of string play. Most cats can\'t \
                                 resist a dangling piece of string, or a piece of rope drawn randomly and enticingly across \
-                                the floor.  This propensity is probably related to their hunting instinct. If string is \
-                                ingested, however, it can get caught in the cat\'s stomach or intestines, causing illness, or in extreme cases, death. \
+                                the floor.  This propensity is probably related to their hunting instinct. \
                             </blockquote> \
                         </section> \
                     </article> \
-                    */
+                    ';
                 var section = document.createElement('section');
                 section.innerHTML = flipviewMarkup;
                 section.className = 'flip-container'; // win-interactive

@@ -1,6 +1,6 @@
 ﻿#detail_flipview {
     height:100%;
-    background-color:hsl(213, 92%, 85%);
+    background-color:black;/*hsl(213, 92%, 85%)*/
 }
 
 .flip-container {
@@ -19,8 +19,8 @@
 
 .flip-container > figcaption {
     position:absolute;
-    top:5%;
-    left:5%;
+    top:3.5rem;
+    left:4rem;
     z-index:2;
 
     box-sizing:border-box;
@@ -36,25 +36,43 @@
 }
 
 .flip-container h1 {
-    color:hsl(0, 0%, 98%);
-    text-shadow:1px 1px 0 rgba(0,0,0,0.5);
+    color:white;
+    /*text-shadow:1px 1px 0 rgba(0,0,0,0.5);*/
 }
 
-.flip-container article {
+.flip-container .metadata {
     display:-ms-flexbox;
+    background-color:hsl(213, 92%, 85%);
 }
 
-    .flip-container article section {
+.metadata > section {
+    margin:6rem auto 6rem;
+    width:525px;
+    height:525px;
+    border-radius:50%;
+    border:3px solid hsl(213, 90%, 75%);
+    text-align:center;
+    background-color:white;
+}
+
+    .flex-center {
         margin:auto;
     }
 
 .flip-container h2 {
-    color:hsl(213, 92%, 85%);
+    color:hsl(213, 80%, 75%);
     font-family:'Segoe Script';
+    font-size:4rem;
+    margin-top:4rem;
+    margin-bottom:1rem;
 }
 
 .flip-container blockquote {
-    color:#666;
+    color:#555;
+    font-size:x-large;
+    font-weight:lighter;
+    margin:0;
+    padding:0 5rem;
 }
 
 @media screen and (-ms-view-state: snapped) {
