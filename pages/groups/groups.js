@@ -28,6 +28,11 @@
             }.bind(this));
 
             this.appbarInit();
+            
+            var slowOut = setTimeout(function () {
+                Appstat.hide();
+                slowOut = null;
+            }, 3000);
         },
 
         updateLayout: function (element, viewState, lastViewState) {

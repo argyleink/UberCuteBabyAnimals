@@ -19,9 +19,10 @@
 
 .flip-container > figcaption {
     position:absolute;
-    top:3.5rem;
-    left:4rem;
+    top:0;
+    left:0;
     z-index:2;
+    padding:3.4rem 4rem 0 4rem;
 
     box-sizing:border-box;
     width:100%;
@@ -37,7 +38,7 @@
 
 .flip-container h1 {
     color:white;
-    /*text-shadow:1px 1px 0 rgba(0,0,0,0.5);*/
+    text-shadow:1px 1px 0 rgba(0,0,0,0.3);
 }
 
 .flip-container .metadata {

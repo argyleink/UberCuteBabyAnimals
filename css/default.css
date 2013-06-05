@@ -7,6 +7,16 @@ body {
     /*background-color:hsl(213, 95%, 95%);*/
 }
 
+#appstatus {
+    position:fixed;
+    top:2rem;
+    left:2rem;
+}
+
+    #appstatus.out {
+        display:none;
+    }
+
 .fragment > header {
     /*background-color:hsl(213, 92%, 90%);*/
     border-bottom:0.5rem hsl(213, 92%, 93%) solid;
@@ -43,7 +53,8 @@ section[role=main] {
     box-sizing:border-box;
 }
 
-.win-backdrop {
+.win-backdrop,
+.win-listview :not(.win-footprint).win-container {
     background-image:none !important;
 }
 
