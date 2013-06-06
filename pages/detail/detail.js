@@ -8,9 +8,12 @@
       , appViewState = Windows.UI.ViewManagement.ApplicationViewState;
 
     WinJS.UI.Pages.define("/pages/detail/detail.html", {
-        
+        _data: null,
+
         ready: function (element, options) {
             item = options.item;
+            this._data = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
+
             this.setAppSize();
 
             CategoryHeader.create(filter_list, item.categories[0].slug);
@@ -27,7 +30,7 @@
             flipview = detail_flipview.winControl;
 
             flipview.itemTemplate = this.renderer;
-            flipview.itemDataSource = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
+            flipview.itemDataSource = this._data;
             flipview.currentPage = idx || 0;
             flipview.onpagecompleted = function (e) {
                 var curItem = detail_flipview.winControl.itemDataSource.itemFromIndex(detail_flipview.winControl.currentPage)._value.data;
@@ -65,6 +68,7 @@
             appwidth = window.innerWidth;
 
             detail_flipview.style.height = appheight + 'px';
+            detail_flipview.style.width = appwidth + 'px';
         },
 
         renderer: function (itemPromise) {
@@ -90,15 +94,15 @@
                     ';
                 var section = document.createElement('section');
                 section.innerHTML = flipviewMarkup;
-                section.className = 'flip-container'; // win-interactive
-                section.style.height = appheight + 'px';
-                section.style.width = appwidth + 'px';
+                section.className = 'flip-container'; 
+                //section.style.height = appheight + 'px';
+                //section.style.width = appwidth + 'px';
 
                 section.querySelector('h1').textContent = item.data.title;
 
                 var image = image = section.querySelector('img');
                 image.className = 'detail-item loading';
-                image.style.width = appwidth + 'px';
+                //image.style.width = appwidth + 'px';
                 image.src = item.data.attachments[0].images.full.url;
 
                 //Pic.load(item.data.attachments[0].images.full.url).then(function (src) {

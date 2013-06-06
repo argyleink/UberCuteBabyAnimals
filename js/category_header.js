@@ -28,9 +28,9 @@
 
             wrap.addEventListener('click', function (e) {
                 WinJS.Navigation.navigate("/pages/collection/collection.html", {
-                    groupKey: e.currentTarget.getAttribute('data-category')
+                    groupData: category
                 });
-            }.bind(this));
+            }.bind(category));
         }
 
         elem.appendChild(pool);

@@ -6,15 +6,12 @@
 .flip-container {
     overflow-y:auto;
     overflow-x:hidden;
+    height:calc(100% - 0px);
+    width:100%;
 }
 
 .flip-container > figure {
     width:100%;
-}
-
-.flip-container > figure > img {
-    width:100%; 
-    margin-bottom:-5px;
 }
 
 .flip-container > figcaption {
@@ -29,7 +26,8 @@
 }
 
 .detail-item {
-    
+    width:100%; 
+    margin-bottom:-5px;
 }
 
 .detail-item.loading {
@@ -85,8 +83,4 @@
         overflow-y:hidden;
         overflow-x:auto;
     }
-        .flip-container > figcaption {
-            position:relative;
-            top:0;
-        }
 }
