@@ -14,7 +14,7 @@
 
                 if (val == null) {
                     console.log('user data null');
-                    Facebook.unsetUser();
+                    //Facebook.unsetUser();
                     Facebook.connected = false;
                 }
                 else {

@@ -62,6 +62,10 @@
         });
     }
 
+    function addSomething(thing) {
+        localStorage.writeText(thing.key, thing.value);
+    }
+
     function newItems(items) {
         cache().done(function (cache) {
             items.forEach(function (item) {
@@ -87,6 +91,7 @@
     }
 
     WinJS.Namespace.define("Storage", {
+        add: addSomething,
         settings: localSettings,
         local: localStorage,
         session: sessionState,

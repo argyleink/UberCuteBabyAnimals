@@ -12,7 +12,7 @@
 
         ready: function (element, options) {
             var listView = element.querySelector(".itemslist").winControl;
-            var group = options.groupKey;
+            var group = options.groupData.slug;
 
             this._items = Data.getItemsFromGroup(group);
             pageList = this._items;
@@ -24,7 +24,7 @@
                 sorted = true;
             }
 
-            element.querySelector("header[role=banner] .pagetitle").textContent = group;
+            element.querySelector("header[role=banner] .pagetitle").textContent = options.groupData.title;
 
             listView.itemDataSource = pageList.dataSource;
             listView.itemTemplate = this.itemRenderer;

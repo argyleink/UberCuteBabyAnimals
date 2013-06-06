@@ -16,7 +16,7 @@
             wrap.setAttribute('data-category', category.slug);
 
             if (current == category.slug) cat.className = 'cur';
-            cat.textContent = category.slug;
+            cat.textContent = category.title;
 
             img.className = 'category-image';
             img.style.backgroundImage = 'url(' + category.image + ')';

@@ -165,12 +165,11 @@
                 this.likeTries++;
             }
             else {
-                like.winControl.label = 'Error, try again.';
-                this.likeTries = 0;
-
-                setTimeout(function () {
-                    like.winControl.label = 'Like';
-                }, 2000);
+                YeahToast.show({
+                    imgsrc: "/images/facebook-icon.png",
+                    title: "DOH...",
+                    textContent: "Try again, connection to Facebook was wonky."
+                });
             }
         }
 

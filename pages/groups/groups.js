@@ -205,7 +205,7 @@
                 header.className = 'home-header';
 
                 var title = document.createElement('h1');
-                title.textContent = item.key;
+                title.textContent = item.data.title;
 
                 var count = document.createElement('span');
                 count.className = 'count';
@@ -215,7 +215,7 @@
                 //header.appendChild(count);
 
                 header.onclick = function (event) {
-                    Application.navigator.pageControl.navigateToGroup(this.key);
+                    Application.navigator.pageControl.navigateToGroup(this.data);
                 }.bind(item);
 
                 return header;
@@ -235,7 +235,7 @@
                 
                 figure.style.backgroundImage = 'url('+ item.data.image + ')';
 
-                title.textContent = item.key;
+                title.textContent = item.data.title;
                 count.textContent = item.data.post_count;
 
                 section.appendChild(figure);
@@ -254,7 +254,7 @@
                 //img.src = item.data.attachments[0].images.large.url;
 
                 var title = document.createElement('h1');
-                title.textContent = item.key;
+                title.textContent = item.data.title;
 
                 section.appendChild(img);
                 section.appendChild(title);
@@ -293,8 +293,10 @@
             }
         },
 
-        navigateToGroup: function (key) {
-            nav.navigate("/pages/collection/collection.html", { groupKey: key });
+        navigateToGroup: function (category) {
+            nav.navigate("/pages/collection/collection.html", {
+                groupData: category
+            });
         },
 
         seeAll: function () {

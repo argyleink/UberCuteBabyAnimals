@@ -101,7 +101,8 @@
 
             if (!categoryContains(item.categories[0].slug)) {
                 categories.push({
-                    slug: item.categories[0].slug, 
+                    slug: item.categories[0].slug,
+                    title: item.categories[0].title,
                     image: item.attachments[0].images.medium.url,
                     newCount: 0
                 });
@@ -138,7 +139,7 @@
             readyComplete = comp;
             readyError = err;
 
-            getWordpressJSON().then(dataRecieved, error);
+            Wordpress.getAll().then(dataRecieved, error);
         });
     }
 
@@ -299,12 +300,31 @@
         return false;
     }
 
-    function getWordpressJSON() {
-        return new WinJS.xhr({
-            url: 'http://www.argyleink.com/babyanimals/?json=1'
-          , type: 'GET'
-          , responseType: 'json'
-        });
+    var Wordpress = {
+
+        getAll: function () {
+            return new WinJS.xhr({
+                url:    'http://www.argyleink.com/babyanimals/?json=1&count=1000'
+                      , type: 'GET'
+                      , responseType: 'json'
+                });
+        },
+
+        getMostRecent: function () {
+            return new WinJS.xhr({
+                url:    'http://www.argyleink.com/babyanimals/?get_most_recent'
+                      , type: 'GET'
+                      , responseType: 'json'
+            });
+        },
+        
+        getAuthorPostsFor: function (author) {
+            return new WinJS.xhr({
+                url:    'http://www.argyleink.com/babyanimals/?get_author_posts&slug=' + author
+                      , type: 'GET'
+                      , responseType: 'json'
+            });
+        }
     }
 
     function updateLiveTiles() {
@@ -318,20 +338,20 @@
     }
 
     WinJS.Namespace.define("Data", {
-        ready: ready(),
-        items: babyGroupedList,
-        homeList: homeGroupedList,
-        categories: getCategories,
-        getCategory: getCategory,
-        getItemReference: getItemReference,
-        getItemsFromGroup: getItemsFromGroup,
-        getItemIndex: getItemIndex,
-        getDescendingList: getDescendingSortedList,
-        getAscendingList: getAscendingSortedList,
-        resolveGroupReference: resolveGroupReference,
-        resolveItemReference: resolveItemReference,
-        getWordpressJSON: getWordpressJSON,
-        getItemsFromQuery: getItemsFromQuery
+        ready:                  ready(),
+        items:                  babyGroupedList,
+        homeList:               homeGroupedList,
+        categories:             getCategories,
+        getCategory:            getCategory,
+        getItemReference:       getItemReference,
+        getItemsFromGroup:      getItemsFromGroup,
+        getItemIndex:           getItemIndex,
+        getDescendingList:      getDescendingSortedList,
+        getAscendingList:       getAscendingSortedList,
+        resolveGroupReference:  resolveGroupReference,
+        resolveItemReference:   resolveItemReference,
+        getWordpressJSON:       Wordpress.getAll,
+        getItemsFromQuery:      getItemsFromQuery
     });
 
 })();

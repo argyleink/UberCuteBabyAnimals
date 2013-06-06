@@ -24,6 +24,13 @@
             .done(function (result) {
                 if (result.responseStatus !== Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp) {
                     console.log('facebook connected');
+
+                    YeahToast.show({
+                        imgsrc: "/images/facebook-icon.png",
+                        title: "Logged In!",
+                        textContent: "Find the Like button in the app bar, while looking at a baby animal full screen."
+                    });
+
                     var responseObj = parseResponse(result);
                     oAuth.accessToken = responseObj.access_token;
                     if (oAuth.accessToken) {
@@ -155,7 +162,13 @@
         oAuth.accessToken = null;
         Facebook.user = null;
         addSettingsFlyout();
-        localFolder.createFileAsync("token.contosodata", Windows.Storage.CreationCollisionOption.replaceExisting);
+        localFolder.createFileAsync("token.ubercutedata", Windows.Storage.CreationCollisionOption.replaceExisting);
+
+        YeahToast.show({
+            imgsrc: "/images/facebook-icon.png",
+            title: "Logged Out",
+            textContent: "See ya later"
+        });
     }
 
     function addSettingsFlyout() {
@@ -189,9 +202,19 @@
         function () {
             addSettingsFlyout();
 
-            YeahToast.show({
-                title: "Now you can Like stuff!",
-                textContent: "Sign in to Facebook from the Charms Bar. (swipe from the right edge, choose Settings)"
+            Storage.exists('facebook_prompts').done(function (result) {
+                if (result == false) {
+                    Storage.add({
+                        key: 'facebook_prompts',
+                        value: '1'
+                    });
+
+                    YeahToast.show({
+                        imgsrc: "/images/facebook-icon.png",
+                        title: "Now you can Like babies!",
+                        textContent: "Sign in to Facebook from the settings (charms)."
+                    });
+                }
             });
         });
     }
