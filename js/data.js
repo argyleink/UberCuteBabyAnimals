@@ -169,10 +169,11 @@
             }
             else {
                 if (cat.cur >= 4) {
+                    cat.cur += 1;
+
                     item.catIndex = cat.cur;
                     item.allIndex = index;
-
-                    cat.cur += 1;
+                    
                     return;
                 }
                 cat.cur += 1;
@@ -302,9 +303,11 @@
 
     var Wordpress = {
 
+        queryVars: '&include=id,title,slug,categories,tags,date,attachments',
+
         getAll: function () {
             return new WinJS.xhr({
-                url:    'http://www.argyleink.com/babyanimals/?json=1&count=1000'
+                url: 'http://www.argyleink.com/babyanimals/?json=1&count=500' + this.queryVars
                       , type: 'GET'
                       , responseType: 'json'
                 });
@@ -312,7 +315,7 @@
 
         getMostRecent: function () {
             return new WinJS.xhr({
-                url:    'http://www.argyleink.com/babyanimals/?get_most_recent'
+                url: 'http://www.argyleink.com/babyanimals/?get_most_recent' + this.queryVars
                       , type: 'GET'
                       , responseType: 'json'
             });
