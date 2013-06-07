@@ -89,9 +89,15 @@
             this.updateLayout();
         },
 
-        setAppSize: function() {
-            appheight = window.innerHeight - 260;
-            appwidth = window.innerWidth;
+        setAppSize: function () {
+            if (appView.value === appViewState.fullScreenPortrait) {
+                appheight = window.innerHeight / 2 - 260;
+                appwidth = window.innerWidth / 2;
+            }
+            else {
+                appheight = window.innerHeight - 260;
+                appwidth = window.innerWidth;
+            }
         },
 
         appbarInit: function() {

@@ -26,36 +26,16 @@
 
             collection_title.textContent = options.groupData.title;
 
-            listView.itemDataSource = pageList.dataSource;
-            listView.itemTemplate = this.itemRenderer;
-            listView.oniteminvoked = this._itemInvoked.bind(this);
-
             CategoryHeader.create(filter_list, group);
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
         },
 
-        unload: function () {
-            this._items.dispose();
+        updateLayout: function (element, viewState, lastViewState) {
+            this.setAppSize();
         },
 
-        updateLayout: function (element, viewState, lastViewState) {
-            var listView = collection_list.winControl;
-            appheight = window.innerHeight;
-
-            if (lastViewState !== viewState) {
-                if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                    var handler = function (e) {
-                        listView.removeEventListener("contentanimating", handler, false);
-                        e.preventDefault();
-                    }
-                    listView.addEventListener("contentanimating", handler, false);
-                    var firstVisible = listView.indexOfFirstVisible;
-                    this._initializeLayout(listView, viewState);
-                    if (firstVisible >= 0 && listView.itemDataSource.list.length > 0) {
-                        listView.indexOfFirstVisible = firstVisible;
-                    }
-                }
-            }
+        unload: function () {
+            this._items.dispose();
         },
 
         _initializeLayout: function (listView, viewState) {
@@ -64,6 +44,18 @@
             } else {
                 listView.layout = new ui.GridLayout({ groupHeaderPosition: "left" });
             }
+            this.setAppSize();
+
+            listView.itemDataSource = pageList.dataSource;
+            listView.itemTemplate = this.itemRenderer;
+            listView.oniteminvoked = this._itemInvoked.bind(this);
+        },
+
+        setAppSize: function() {
+            if (Windows.UI.ViewManagement.ApplicationView.value === appViewState.fullScreenPortrait)
+                appheight = window.innerHeight / 2 - 120;
+            else
+                appheight = window.innerHeight - 210;
         },
 
         _itemInvoked: function (args) {
