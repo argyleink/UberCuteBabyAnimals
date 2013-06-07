@@ -5,6 +5,10 @@
 
 body {
     /*background-color:hsl(213, 95%, 95%);*/
+    background:-ms-linear-gradient(
+        white 0%, white 120px, 
+        hsl(212, 88%, 90%) 120px, hsl(208, 88%, 90%) 130px, 
+        hsl(217, 90%, 96%) 130px, hsl(217, 90%, 96%) 100%)
 }
 
 #appstatus {
@@ -18,12 +22,12 @@ body {
     }
 
 .fragment > header {
-    /*background-color:hsl(213, 92%, 90%);*/
-    border-bottom:0.5rem hsl(213, 92%, 93%) solid;
+    /*background-color:hsl(213, 92%, 90%);
+    border-bottom:0.5rem hsl(213, 92%, 93%) solid;*/
 }
 
 .win-listview {
-    background-color:hsl(213, 92%, 98%);
+    /*background-color:hsl(213, 92%, 98%);*/
 }
 
 figure {
@@ -104,7 +108,7 @@ section[role=main] {
     }
 
 .pagetitle {
-    color:hsl(213, 75%, 60%);
+    color:hsl(213, 70%, 70%);
     text-transform:capitalize;
 }
 
@@ -225,7 +229,7 @@ progress.win-ring {
 }
 
 progress:indeterminate {
-    color:hsl(213, 92%, 75%); 
+    color:hsl(213, 70%, 70%); 
 }
 
 .win-flipview .win-navbutton {
