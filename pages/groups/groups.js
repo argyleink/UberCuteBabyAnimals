@@ -10,7 +10,8 @@
       , groupsezo
       , boundList
       , appheight
-      , appwidth;
+      , appwidth
+      , listloaded;
 
     ui.Pages.define("/pages/groups/groups.html", {
 
@@ -28,11 +29,6 @@
             }.bind(this));
 
             this.appbarInit();
-            
-            var slowOut = setTimeout(function () {
-                Appstat.hide();
-                slowOut = null;
-            }, 3000);
         },
 
         updateLayout: function (element, viewState, lastViewState) {
@@ -87,6 +83,13 @@
             
             //CategoryHeader.create(filter_list);
             this.updateLayout();
+
+            grouplist.onloadingstatechanged = function (e) {
+                if (!listloaded && group_list.winControl.loadingState === 'viewPortLoaded') {
+                    Appstat.hide();
+                    listloaded = true;
+                }
+            }
         },
 
         setAppSize: function () {
