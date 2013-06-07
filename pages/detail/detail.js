@@ -98,7 +98,8 @@
 
                 var image = image = section.querySelector('img');
                 image.className = 'detail-item loading';
-                image.src = item.data.attachments[0].images.full.url;
+                var imgurl = appwidth < 400 ? item.data.attachments[0].images.large.url : item.data.attachments[0].images.full.url;
+                image.src = imgurl;
 
                 //Pic.load(item.data.attachments[0].images.full.url).then(function (src) {
                 //    image.src = src;

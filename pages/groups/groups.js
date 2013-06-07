@@ -154,7 +154,8 @@
 
                 div.appendChild(figure);
 
-                Pic.load(item.data.attachments[0].images.large.url).then(function (src) {
+                var imgurl = appheight > 900 ? item.data.attachments[0].images.full.url : item.data.attachments[0].images.large.url;
+                Pic.load(imgurl).then(function (src) {
                     figure.style.backgroundImage = 'url(' + src + ')';
                     figure.classList.remove('loading');
                 });
