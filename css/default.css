@@ -239,6 +239,9 @@ progress:indeterminate {
     border-radius:0 0 0.4rem 0;
     color:hsl(213, 90%, 60%);
 }
+    .win-flipview .win-navbutton.win-navright {
+        border-radius:0 0 0 0.4rem;
+    }
 
 .win-flipview .win-navbutton:active,
 .win-flipview .win-navbutton:hover {
