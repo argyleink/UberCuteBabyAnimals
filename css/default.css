@@ -13,8 +13,8 @@ body {
 
 #appstatus {
     position:fixed;
-    top:2rem;
-    left:2rem;
+    top:115px;
+    left:0;
 }
 
     #appstatus.out {

@@ -65,21 +65,6 @@
             });
         },
 
-        unlike: function (options) {
-            debug && console.log('unliking ' + options.title);
-
-            return new WinJS.Promise(function (complete, error) {
-                setTimeout(function () {
-                    try {
-                        complete(true);
-                    }
-                    catch (e) {
-                        error(e);
-                    }
-                }, 1000);
-            });
-        },
-
         getTotalLikes: function (id) {
             debug && console.log('getting total likes for id:' + id);
 
