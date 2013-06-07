@@ -226,13 +226,59 @@ figure {
         font-weight:lighter;
     }
 
+.snap-img {
+    width:100%;
+    height:130px;
+}
+
+.snap-title {
+    font-size:xx-large;
+    text-transform:capitalize;
+    margin-bottom:0.5rem;
+}
+
 @media screen and (-ms-view-state: snapped) {
-    
+    .homelist .win-container {
+        padding:0 1rem 0 1rem;
+        box-sizing:border-box;
+    }
+    .homelist .win-viewport {
+        padding:0;
+    }
+    .top-logo {
+        width:270px;
+        height:auto !important;
+    }
+    .fragment header[role=banner] .titlearea {
+        margin-top:2rem;
+    }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
     figure {
         background-size:cover;
         background-position:center center;
+    }
+}
+
+@media (min-width:1400px) {
+    .group-tile h1 {
+        font-size:12rem;
+        padding-top:0.5rem;
+    }
+    .sezo-item h2 {
+        font-size:13rem;
+        line-height:8rem;
+    }
+}
+
+@media (min-width:1920px) {
+    .group-tile h1 {
+        font-size:15rem;
+        padding-top:1.1rem;
+    }
+    .sezo-item h2 {
+        font-size:16rem;
+        line-height:11rem;
     }
 }

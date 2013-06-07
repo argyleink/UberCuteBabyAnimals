@@ -258,14 +258,16 @@
             return itemPromise.then(function (item) {
                 var section = document.createElement('section');
 
-                var img = document.createElement('img');
-                //img.src = item.data.attachments[0].images.large.url;
+                var img = document.createElement('figure');
+                img.className = 'snap-img';
+                img.style.backgroundImage = 'url(' + item.data.image + ')';
 
                 var title = document.createElement('h1');
+                title.className = 'snap-title';
                 title.textContent = item.data.title;
 
-                section.appendChild(img);
                 section.appendChild(title);
+                section.appendChild(img);
 
                 return section;
             });
@@ -273,8 +275,8 @@
 
         _itemInvoked: function (args) {
             if (appView.value === appViewState.snapped) {
-                var group = Data.groups.getAt(args.detail.itemIndex);
-                this.navigateToGroup(group.key);
+                var group = Data.items.getAt(args.detail.itemIndex);
+                this.navigateToGroup(group);
             }
             else if (args.detail.itemPromise._value.data.box) {
                 Storage.session.home.index = args.detail.itemIndex;

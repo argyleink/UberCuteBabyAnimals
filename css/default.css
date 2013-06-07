@@ -7,8 +7,8 @@ body {
     /*background-color:hsl(213, 95%, 95%);*/
     background:-ms-linear-gradient(
         white 0%, white 120px, 
-        hsl(212, 88%, 90%) 120px, hsl(208, 88%, 90%) 130px, 
-        hsl(217, 90%, 96%) 130px, hsl(217, 90%, 96%) 100%)
+        hsl(212, 88%, 90%) 118px, hsl(208, 88%, 90%) 128px, 
+        hsl(217, 90%, 96%) 128px, hsl(217, 90%, 96%) 100%)
 }
 
 #appstatus {
@@ -60,6 +60,7 @@ section[role=main] {
 .win-backdrop,
 .win-listview :not(.win-footprint).win-container {
     background-image:none !important;
+    background-color:transparent !important;
 }
 
 .fragment {
