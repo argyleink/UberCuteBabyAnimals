@@ -75,7 +75,19 @@
 }
 
 @media screen and (-ms-view-state: snapped) {
-    
+    .metadata > section {
+        width:100%;
+        height:auto;
+        margin:0;
+        background-color:transparent;
+        border:none;
+        border-radius:0;
+    }
+    .flip-container blockquote {
+        padding:1rem 1rem 5rem;
+        color:white;
+        font-size:large;
+    }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {

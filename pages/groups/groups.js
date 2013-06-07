@@ -36,7 +36,7 @@
             viewState = viewState || appViewState;
             this.setAppSize();
 
-            if (viewState === appViewState.snapped) {
+            if (appView.value === appViewState.snapped) {
 
                 grouplist.groupHeaderTemplate = null;
                 grouplist.itemTemplate = this.snapRenderer;
@@ -278,7 +278,7 @@
 
         _itemInvoked: function (args) {
             if (appView.value === appViewState.snapped) {
-                var group = Data.items.getAt(args.detail.itemIndex);
+                var group = args.detail.itemPromise._value.data;
                 this.navigateToGroup(group);
             }
             else if (args.detail.itemPromise._value.data.box) {

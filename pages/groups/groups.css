@@ -239,7 +239,7 @@ figure {
 
 @media screen and (-ms-view-state: snapped) {
     .homelist .win-container {
-        padding:0 1rem 0 1rem;
+        padding-left:0.5rem;
         box-sizing:border-box;
     }
     .homelist .win-viewport {

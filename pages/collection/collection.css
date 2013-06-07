@@ -15,7 +15,11 @@
 }
 
 @media screen and (-ms-view-state: snapped) {
-    
+    .itemslist .win-viewport,
+    .searchlist .win-viewport {
+        padding-left:0.9rem;
+        padding-top:2em;
+    }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
