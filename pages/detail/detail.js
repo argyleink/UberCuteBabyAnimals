@@ -14,9 +14,9 @@
             item = options.item;
             this._data = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
 
-            this.setAppSize();
+            this.updateLayout();
 
-            CategoryHeader.create(filter_list, item.categories[0].slug);
+            CategoryHeader.create(filter_list, item.categories[0]);
 
             this.initFlipview(options.index);
             this.initLike();
@@ -45,8 +45,6 @@
                 }
                 
             };
-
-            detail_flipview.focus();
         },
 
         updateLayout: function (element, viewState, lastViewState) {
@@ -95,14 +93,11 @@
                 var section = document.createElement('section');
                 section.innerHTML = flipviewMarkup;
                 section.className = 'flip-container'; 
-                //section.style.height = appheight + 'px';
-                //section.style.width = appwidth + 'px';
 
                 section.querySelector('h1').textContent = item.data.title;
 
                 var image = image = section.querySelector('img');
                 image.className = 'detail-item loading';
-                //image.style.width = appwidth + 'px';
                 image.src = item.data.attachments[0].images.full.url;
 
                 //Pic.load(item.data.attachments[0].images.full.url).then(function (src) {

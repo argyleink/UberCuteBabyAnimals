@@ -11,7 +11,7 @@
         _items: null,
 
         ready: function (element, options) {
-            var listView = element.querySelector(".itemslist").winControl;
+            var listView = collection_list.winControl;
             var group = options.groupData.slug;
 
             this._items = Data.getItemsFromGroup(group);
@@ -24,7 +24,7 @@
                 sorted = true;
             }
 
-            element.querySelector("header[role=banner] .pagetitle").textContent = options.groupData.title;
+            collection_title.textContent = options.groupData.title;
 
             listView.itemDataSource = pageList.dataSource;
             listView.itemTemplate = this.itemRenderer;
@@ -39,7 +39,7 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
-            var listView = element.querySelector(".itemslist").winControl;
+            var listView = collection_list.winControl;
             appheight = window.innerHeight;
 
             if (lastViewState !== viewState) {

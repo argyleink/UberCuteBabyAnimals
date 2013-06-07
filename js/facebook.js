@@ -2,6 +2,7 @@
     "use strict";
 
     var auth = oAuth;
+    var debug = false;
 
     WinJS.Namespace.define("Facebook", {
         userData: null,
@@ -13,12 +14,12 @@
                 this.userData = val;
 
                 if (val == null) {
-                    console.log('user data null');
+                    debug && console.log('user data null');
                     //Facebook.unsetUser();
                     Facebook.connected = false;
                 }
                 else {
-                    console.log('user data set: ' + val);
+                    debug && console.log('user data set: ' + val);
                     this.isConnected = true;
                     //Facebook.setUser();
                 }
@@ -41,7 +42,7 @@
         },
 
         postStatus: function (item) {
-            console.log('posting: ' + item.title);
+            debug && console.log('posting: ' + item.title);
 
             return new WinJS.xhr({
                 type: 'POST',
@@ -65,7 +66,7 @@
         },
 
         unlike: function (options) {
-            console.log('unliking ' + options.title);
+            debug && console.log('unliking ' + options.title);
 
             return new WinJS.Promise(function (complete, error) {
                 setTimeout(function () {
@@ -80,7 +81,7 @@
         },
 
         getTotalLikes: function (id) {
-            console.log('getting total likes for id:' + id);
+            debug && console.log('getting total likes for id:' + id);
 
             return new WinJS.Promise(function (complete, error) {
                 setTimeout(function () {
@@ -95,7 +96,7 @@
         },
 
         getWhoLikes: function (id) {
-            console.log('get who likes id: ' + id);
+            debug && console.log('get who likes id: ' + id);
 
             return new WinJS.Promise(function (complete, error) {
                 setTimeout(function () {
@@ -110,7 +111,7 @@
         },
 
         comment: function (options) {
-            console.log('commenting on ' + options.title);
+            debug && console.log('commenting on ' + options.title);
 
             return new WinJS.Promise(function (complete, error) {
                 setTimeout(function () {
@@ -125,7 +126,7 @@
         },
 
         getUserData: function () {
-            console.log('getting user data');
+            debug && console.log('getting user data');
 
             return new WinJS.xhr({
                 type: 'GET',

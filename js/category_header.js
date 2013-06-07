@@ -15,7 +15,7 @@
 
             wrap.setAttribute('data-category', category.slug);
 
-            if (current == category.slug) cat.className = 'cur';
+            if (current.slug == category.slug) cat.className = 'cur';
             cat.textContent = category.title;
 
             img.className = 'category-image';
@@ -26,11 +26,14 @@
 
             pool.appendChild(wrap);
 
-            wrap.addEventListener('click', function (e) {
-                WinJS.Navigation.navigate("/pages/collection/collection.html", {
-                    groupData: category
-                });
-            }.bind(category));
+            (function (item, cat) {
+                item.addEventListener('click', function (e) {
+                    WinJS.Navigation.navigate("/pages/collection/collection.html", {
+                        groupData: cat
+                    });
+                }.bind(cat));
+            })(wrap, category);
+            
         }
 
         elem.appendChild(pool);

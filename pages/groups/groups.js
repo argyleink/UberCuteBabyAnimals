@@ -47,6 +47,7 @@
                 grouplist.itemDataSource = boundList.groups.dataSource;
                 grouplist.groupDataSource = null;
                 grouplist.indexOfFirstVisible = Storage.session.home.index || 0;
+                grouplist.currentItem = Storage.session.home.index || 0;
                 grouplist.layout = new ui.ListLayout();
 
                 groupsezo.locked = true;
@@ -59,6 +60,7 @@
                 grouplist.groupDataSource = boundList.groups.dataSource;
                 grouplist.groupHeaderTemplate = this.headerRenderer;
                 grouplist.indexOfFirstVisible = Storage.session.home.index || 0;
+                grouplist.currentItem = Storage.session.home.index || 0;
                 grouplist.layout = new ui.GridLayout({
                     groupHeaderPosition: "top"
                   , groupInfo: {

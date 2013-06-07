@@ -179,6 +179,10 @@ a, a:visited {
     background-color:hsla(213, 92%, 93%, 0.95) !important;
 }
 
+.win-appbarclickeater {
+ display:none !important ;
+}
+
 .win-commandimage {
     color:hsl(213, 92%, 75%) !important;
 }

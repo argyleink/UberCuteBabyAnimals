@@ -10,9 +10,10 @@
     var accessToken = null;
     var tokenFile = null;
     var localFolder = Windows.Storage.ApplicationData.current.localFolder;
+    var debug = false;
 
     function launchFacebookWebAuth() {
-        console.log('launching facebook authentication');
+        debug && console.log('launching facebook authentication');
         facebookURL += clientID + "&redirect_uri=" + encodeURIComponent(callbackURL) + "&scope=publish_actions&display=popup&response_type=token";
 
         var startURI = new Windows.Foundation.Uri(facebookURL);
@@ -23,7 +24,7 @@
             Windows.Security.Authentication.Web.WebAuthenticationOptions.none, startURI, endURI)
             .done(function (result) {
                 if (result.responseStatus !== Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp) {
-                    console.log('facebook connected');
+                    debug && console.log('facebook connected');
 
                     YeahToast.show({
                         imgsrc: "/images/facebook-icon.png",
@@ -43,7 +44,7 @@
                 }
                 authzInProgress = false;
             }, function (err) {
-                console.log('facebook connect has failed');
+                debug && console.log('facebook connect has failed');
                 WinJS.log("Error returned by WebAuth broker: " + err, "Web Authentication SDK Sample", "error");
                 authzInProgress = false;
             });
@@ -81,11 +82,11 @@
     }
 
     function getToken() {
-        console.log('checking for a local auth token');
+        debug && console.log('checking for a local auth token');
         return new WinJS.Promise(function (c, e, p) {
             localFolder.getFileAsync("token.ubercutedata").done(
             function (file) {
-                console.log('local auth token exists');
+                debug && console.log('local auth token exists');
                 tokenFile = file;
                 readText(tokenFile).then(function () {
                     c();
@@ -94,9 +95,9 @@
                 });
             },
             function (err) {
-                console.log('no local auth token, creating one now...');
+                debug && console.log('no local auth token, creating one now...');
                 localFolder.createFileAsync("token.ubercutedata", Windows.Storage.CreationCollisionOption.replaceExisting).done(function (file) {
-                    console.log('local auth token created');
+                    debug && console.log('local auth token created');
                     tokenFile = file;
                     e('no authentication token');
                 });
@@ -119,11 +120,11 @@
 
     function setUserData() {
         Facebook.getUserData().then(function (data) {
-            console.log('data exists!');
+            debug && console.log('data exists!');
             Facebook.user = JSON.parse(data.responseText);;
         }, function (error) {
             Facebook.user = null;
-            console.log('getUserDataFailed: ' + error);
+            debug && console.log('getUserDataFailed: ' + error);
         });
     }
 
@@ -158,7 +159,7 @@
     }
 
     function logOut() {
-        console.log('logged out');
+        debug && console.log('logged out');
         oAuth.accessToken = null;
         Facebook.user = null;
         addSettingsFlyout();

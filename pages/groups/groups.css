@@ -41,7 +41,7 @@
 
         #filter_list > li:active,
         #filter_list > li:hover {
-            transform:scale(0.90);
+            transform:scale(0.94);
         }
 
 #filter_list h2 {
