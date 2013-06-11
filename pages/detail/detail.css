@@ -27,7 +27,7 @@
 
 .detail-item {
     width:100%; 
-    margin-bottom:-5px;
+    margin-bottom:-1rem;
 }
 
 .detail-item.loading {
