@@ -13,7 +13,8 @@
         _items: null,
 
         ready: function (element, options) {
-            searchPane.placeholderText = 'puppies';
+            searchPane.placeholderText = 'puppies, kittens, bears...';
+            searchPane.onquerychanged = this.keyPressed;
 
             listView = search_list.winControl;
             query = (options && options.queryText) ? options.queryText : '';
@@ -29,7 +30,7 @@
             element.querySelector("header[role=banner] .pagetitle").textContent = '“' + query + '”';
             resultslength.textContent = this._items.length + ' results';
 
-            CategoryHeader.create(filter_list);
+            //CategoryHeader.create(filter_list, );
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
         },
 
@@ -100,6 +101,10 @@
             listView.itemDataSource = pageList.dataSource;
             listView.itemTemplate = this.itemRenderer;
             listView.oniteminvoked = this._itemInvoked.bind(this);
+        },
+
+        keyPressed: function (e) {
+            console.log(e);
         }
 
     });

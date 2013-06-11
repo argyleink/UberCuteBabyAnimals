@@ -123,9 +123,8 @@
                 like.addEventListener('click', this.like.bind(this));
             }
             else {
-                detail_appbar.winControl.hideCommands([
-                    like.winControl
-                ]);
+                like.winControl.label = 'Login to like on Facebook';
+                like.disabled = true;
             }
         },
 
