@@ -11,14 +11,15 @@
         _data: null,
 
         ready: function (element, options) {
-            item = options.item;
-            this._data = Data.getItemsFromGroup(item.categories[0].slug).dataSource;
+            item = options.item || options.group;
+            var group = item.categories && item.categories[0].slug || item.slug;
+            this._data = Data.getItemsFromGroup(group).dataSource;
 
             this.updateLayout();
 
-            CategoryHeader.create(filter_list, item.categories[0]);
+            CategoryHeader.create(filter_list, group, true);
 
-            this.initFlipview(options.index);
+            this.initFlipview(options.index || 0);
             this.initLike();
             this.initAppbar();
 
@@ -31,7 +32,7 @@
 
             flipview.itemTemplate = this.renderer;
             flipview.itemDataSource = this._data;
-            flipview.currentPage = idx || 0;
+            flipview.currentPage = idx;
             flipview.onpagecompleted = function (e) {
                 var curItem = detail_flipview.winControl.itemDataSource.itemFromIndex(detail_flipview.winControl.currentPage)._value.data;
                 

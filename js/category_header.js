@@ -1,11 +1,16 @@
 ﻿(function () {
     "use strict";
 
-    var cats = Data.categories()
+    var cats
       , pool;
 
-    function create(elem, current) {
+    Data.ready.then(function () {
+        cats = Data.categories();
+    });
+
+    function create(elem, current, detail) {
         pool = document.createDocumentFragment();
+        current = current.slug || current;
 
         for (var i = 0, l = cats.length; i < l; i++) {
             var category = cats[i],
@@ -15,7 +20,7 @@
 
             wrap.setAttribute('data-category', category.slug);
 
-            if (current.slug == category.slug) cat.className = 'cur';
+            if (current == category.slug) cat.className = 'cur';
             cat.textContent = category.title;
 
             img.className = 'category-image';
@@ -26,13 +31,20 @@
 
             pool.appendChild(wrap);
 
-            (function (item, cat) {
+            (function (item, cat, d) {
                 item.addEventListener('click', function (e) {
-                    WinJS.Navigation.navigate("/pages/collection/collection.html", {
-                        groupData: cat
-                    });
+                    if (d) {
+                        WinJS.Navigation.navigate("/pages/detail/detail.html", {
+                            group: cat
+                        });
+                    }
+                    else {
+                        WinJS.Navigation.navigate("/pages/collection/collection.html", {
+                            groupData: cat
+                        });
+                    }
                 }.bind(cat));
-            })(wrap, category);
+            })(wrap, category, detail);
             
         }
 
