@@ -44,18 +44,21 @@ App.LiveTile = function () {
         //get a XML DOM version of a specific template by using getTemplateContent
         if (tile.text == "") {
             var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWideImage);
+            var tileImageAttributes = tileXml.getElementsByTagName("image");
+            tileImageAttributes[0].setAttribute("src", tile.srcWide);
         }
         else {
-            var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWideImageAndText01);
+            var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWidePeekImage06);
 
             // get the text attributes for this template and fill them in
             var tileTextAttributes = tileXml.getElementsByTagName("text");
-            tileTextAttributes[0].appendChild(tileXml.createTextNode(tile.text));
-        }
+            tileTextAttributes[0].appendChild(tileXml.createTextNode(tile.text || tile.category));
 
-        // get the image attributes for this template and fill them in
-        var tileImageAttributes = tileXml.getElementsByTagName("image");
-        tileImageAttributes[0].setAttribute("src", tile.srcWide);
+            // get the image attributes for this template and fill them in
+            var tileImageAttributes = tileXml.getElementsByTagName("image");
+            tileImageAttributes[0].setAttribute("src", tile.srcWide);
+            tileImageAttributes[1].setAttribute("src", tile.srcSmall);
+        }
 
         // fill in a version of the square template returned by GetTemplateContent
         var squareTileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileSquareImage);
