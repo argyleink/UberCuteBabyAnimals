@@ -4,13 +4,9 @@
 }
 
 .flip-container {
-    overflow-y:auto;
-    overflow-x:hidden;
+    overflow:scroll;
+    -ms-content-zooming: zoom;
     height:calc(100% - 0px);
-    width:100%;
-}
-
-.flip-container > figure {
     width:100%;
 }
 
@@ -25,9 +21,14 @@
     width:100%;
 }
 
+.image-wrapper {
+    width:100%;
+    border-radius:0;
+    text-align:center;
+}
+
 .detail-item {
-    width:100%; 
-    /*margin-bottom:-1rem;*/
+    
 }
 
 .detail-item.loading {

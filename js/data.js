@@ -120,8 +120,7 @@
                 liveTileContent.push({
                     srcWide: item.attachments[0].images.large.url,
                     srcSmall: item.attachments[0].images.medium.url,
-                    text: item.title,
-                    category: item.categories[0].title.charAt(0).toUpperCase() + item.categories[0].title.slice(1)
+                    text: item.title
                 });
             }
 
