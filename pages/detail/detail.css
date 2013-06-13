@@ -15,7 +15,7 @@
     top:0;
     left:0;
     z-index:2;
-    padding:3.4rem 4rem 0 4rem;
+    padding:3.3rem 4rem 0 4rem;
 
     box-sizing:border-box;
     width:100%;
@@ -24,11 +24,11 @@
 .image-wrapper {
     width:100%;
     border-radius:0;
-    text-align:center;
+    height:100%;
 }
 
 .detail-item {
-    
+    width:100%;
 }
 
 .detail-item.loading {
@@ -93,7 +93,9 @@
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
     .flip-container {
-        overflow-y:hidden;
-        overflow-x:auto;
+        
     }
+        .flip-container > figcaption {
+            position:relative;
+        }
 }
