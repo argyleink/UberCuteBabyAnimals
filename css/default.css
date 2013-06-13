@@ -13,8 +13,8 @@ body {
 
 #homeAd {
     position: absolute; 
-    top: 20px; 
-    right: 20px; 
+    top: 15px; 
+    right: 15px; 
     width: 728px; 
     height: 90px;
     z-index:1000;
