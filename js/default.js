@@ -1,9 +1,10 @@
 ﻿(function () {
     "use strict";
 
-    var app             = WinJS.Application
-      , activation      = Windows.ApplicationModel.Activation
-      , searchPageURI   = '/pages/search/search.html';
+    var app                 = WinJS.Application
+      , activation          = Windows.ApplicationModel.Activation
+      , touchCapabilities   = new Windows.Devices.Input.TouchCapabilities()
+      , searchPageURI       = '/pages/search/search.html';
 
     app.addEventListener("activated", function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
@@ -26,6 +27,9 @@
                 });
             }));
         }
+
+        if (touchCapabilities.touchPresent)
+            WinJS.Utilities.addClass(document.body, 'touch');
     });
 
     app.oncheckpoint = function (args) {
