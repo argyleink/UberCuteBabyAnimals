@@ -45,6 +45,17 @@
                     }
                 }
                 
+                var title = e.srcElement.querySelector('figcaption');
+                if (title.style.opacity !== "0") return;
+
+                WinJS.UI.Animation.enterContent(
+                    e.srcElement.querySelector('figcaption'),
+                    {
+                        top: "-30px",
+                        left: "0px",
+                        rtlflip: true
+                    }
+                );
             };
         },
 
@@ -73,15 +84,15 @@
         renderer: function (itemPromise) {
             return itemPromise.then(function (item) {
                 var flipviewMarkup =
-                    '<figcaption class="details"> \
+                    '<figcaption class="details" style="opacity:0;"> \
                         <h1 class="title"></h1> \
                         <p class="blurb"></p> \
                     </figcaption> \
                     <figure class="image-wrapper"> \
                         <img class="loading" /> \
                     </figure> \
+                ';
                 //<article class="metadata"> \
-                    ';
                 //        <section class="flex-center"> \
                 //            <h2>Fact</h2> \
                 //            <blockquote> \
