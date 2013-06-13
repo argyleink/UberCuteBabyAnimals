@@ -20,6 +20,7 @@
             searchPane.placeholderText = 'puppies';
 
             this.setAppSize();
+            this.setBodyClass();
 
             Storage.session['home'] = Storage.session.home || {}; // init home session
 
@@ -90,6 +91,12 @@
                     listloaded = true;
                 }
             }
+        },
+
+        setBodyClass: function () {
+            document.body.classList.remove('detail');
+            document.body.classList.remove('collection');
+            document.body.classList.add('group');
         },
 
         setAppSize: function () {

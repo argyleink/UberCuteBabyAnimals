@@ -28,6 +28,7 @@
 
             CategoryHeader.create(filter_list, group);
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
+            this.setBodyClass();
         },
 
         updateLayout: function (element, viewState, lastViewState) {
@@ -49,6 +50,12 @@
             listView.itemDataSource = pageList.dataSource;
             listView.itemTemplate = this.itemRenderer;
             listView.oniteminvoked = this._itemInvoked.bind(this);
+        },
+
+        setBodyClass: function () {
+            document.body.classList.remove('group');
+            document.body.classList.remove('detail');
+            document.body.classList.add('collection');
         },
 
         setAppSize: function() {

@@ -22,6 +22,7 @@
             this.initFlipview(options.index || 0);
             this.initLike();
             this.initAppbar();
+            this.setBodyClass();
 
             App.Share.enable();
             App.Share.data(item);
@@ -71,6 +72,12 @@
             else if (viewState === appViewState.fullScreenLandscape) {
                 flipview.orientation = 'horizontal';
             }
+        },
+
+        setBodyClass: function() {
+            document.body.classList.remove('group');
+            document.body.classList.remove('collection');
+            document.body.classList.add('detail');
         },
 
         setAppSize: function() {
@@ -134,7 +141,7 @@
                 like.addEventListener('click', this.like.bind(this));
             }
             else {
-                like.winControl.label = 'Login to like on Facebook';
+                like.winControl.label = 'Login from Options in the app Settings to Like';
                 like.disabled = true;
             }
         },

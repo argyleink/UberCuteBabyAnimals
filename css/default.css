@@ -20,6 +20,10 @@ body {
     z-index:1000;
 }
 
+.detail #homeAd {
+    display:none;
+}
+
 #appstatus {
     position:fixed;
     top:115px;
@@ -358,4 +362,10 @@ input[type=range]:disabled::-ms-fill-lower {
         .fragment header[role=banner] .win-backbutton {
             margin-left: 29px;
         }
+
+    .detail #homeAd {
+        display:block;
+        top:auto;
+        bottom:15px;
+    }
 }
