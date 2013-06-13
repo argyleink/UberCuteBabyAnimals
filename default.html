@@ -15,6 +15,7 @@
     <link href="/pages/groups/groups.css" rel="stylesheet" />
     <link href="/pages/collection/collection.css" rel="stylesheet" />
     
+    <script src="/MSAdvertisingJS/ads/ad.js" ></script>
     <script src="/js/livetile.js"></script>
     <script src="/js/YeahToast.js"></script>
     <script src="/js/localstorage.js"></script>
@@ -33,5 +34,14 @@
     <div id="contenthost" data-win-control="Application.PageControlNavigator" 
         data-win-options="{home: '/pages/groups/groups.html'}"></div>
     <progress id="appstatus"></progress>
+    <div id="homeAd"  
+            data-win-control="MicrosoftNSJS.Advertising.AdControl" 
+            data-win-options="{
+            applicationId:          '826c91d7-cdb9-4405-aab5-0d9b945e5605', 
+            adUnitId:               '10047900',
+            isAutoRefreshEnabled:   true,
+            keywords:               'animals, baby, babies, cute, warm, happy, smile, mom, dad, family, kids, love, life, laugh, funny, adorable, sweet'
+        }">
+    </div>
 </body>
 </html>
