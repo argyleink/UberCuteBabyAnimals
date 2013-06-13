@@ -23,13 +23,13 @@
         Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
             Windows.Security.Authentication.Web.WebAuthenticationOptions.none, startURI, endURI)
             .done(function (result) {
-                if (result.responseStatus !== Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp) {
+                if (result.responseStatus == Windows.Security.Authentication.Web.WebAuthenticationStatus.success) {
                     debug && console.log('facebook connected');
 
                     YeahToast.show({
                         imgsrc: "/images/facebook-icon.png",
                         title: "Logged In!",
-                        textContent: "Find the Like button in the app bar, while looking at a baby animal full screen."
+                        textContent: "Time to share some cute."
                     });
 
                     var responseObj = parseResponse(result);
@@ -115,7 +115,7 @@
             launchFacebookWebAuth();
         });
 
-        addSettingsFlyout();
+        //addSettingsFlyout();
     }
 
     function setUserData() {
@@ -162,7 +162,7 @@
         debug && console.log('logged out');
         oAuth.accessToken = null;
         Facebook.user = null;
-        addSettingsFlyout();
+        //addSettingsFlyout();
         localFolder.createFileAsync("token.ubercutedata", Windows.Storage.CreationCollisionOption.replaceExisting);
 
         YeahToast.show({
@@ -197,11 +197,11 @@
 
     function initialize() {
         getToken().done(function () {
-            addSettingsFlyout();
+            //addSettingsFlyout();
             setUserData();
         },
         function () {
-            addSettingsFlyout();
+            //addSettingsFlyout();
 
             Storage.exists('facebook_prompts').done(function (result) {
                 if (result == false) {
@@ -223,6 +223,8 @@
     return {
         initialize: initialize,
         facebook: authenticate,
-        accessToken: accessToken
+        accessToken: accessToken,
+        login: authenticate,
+        logout: logOut
     };
 })();
