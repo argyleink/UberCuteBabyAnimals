@@ -367,5 +367,6 @@ input[type=range]:disabled::-ms-fill-lower {
         display:block;
         top:auto;
         bottom:15px;
+        right:20px;
     }
 }

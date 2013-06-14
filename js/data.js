@@ -116,7 +116,7 @@
             });
 
             // make 5 live tiles
-            if (itemCount < 5) {
+            if (itemCount < 4) {
                 liveTileContent.push({
                     srcWide: item.attachments[0].images.large.url,
                     srcSmall: item.attachments[0].images.medium.url,

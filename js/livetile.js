@@ -18,16 +18,16 @@ App.LiveTile = function () {
 
     LiveTile.updateLiveTiles = function (tiles) {
         LiveTile.clear();
-        var logo = {
-            text: "",
-            srcWide: "/assets/images/wide-logo.png",
-            srcSmall: "/assets/images/wide-logo.png"
-        };
-
+        
         for (var i = 0; i < tiles.length; i++) {
             LiveTile.appendLiveTile(tiles[i]);
         }
-        LiveTile.appendLiveTile(logo);
+
+        LiveTile.appendLiveTile({
+            text: "",
+            srcWide: "/assets/images/wide-logo.png",
+            srcSmall: "/assets/images/wide-logo.png"
+        });
     }
 
 
@@ -42,23 +42,23 @@ App.LiveTile = function () {
 
     LiveTile.appendLiveTile = function (tile) {
         //get a XML DOM version of a specific template by using getTemplateContent
-        if (tile.text == "") {
+        //if (tile.text == "") {
             var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWideImage);
             var tileImageAttributes = tileXml.getElementsByTagName("image");
             tileImageAttributes[0].setAttribute("src", tile.srcWide);
-        }
-        else {
-            var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWidePeekImage06);
+        //}
+        //else {
+        //    var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWidePeekImage06);
 
-            // get the text attributes for this template and fill them in
-            var tileTextAttributes = tileXml.getElementsByTagName("text");
-            tileTextAttributes[0].appendChild(tileXml.createTextNode(tile.text || tile.category));
+        //    // get the text attributes for this template and fill them in
+        //    var tileTextAttributes = tileXml.getElementsByTagName("text");
+        //    tileTextAttributes[0].appendChild(tileXml.createTextNode(tile.text || tile.category));
 
-            // get the image attributes for this template and fill them in
-            var tileImageAttributes = tileXml.getElementsByTagName("image");
-            tileImageAttributes[0].setAttribute("src", tile.srcWide);
-            tileImageAttributes[1].setAttribute("src", tile.srcSmall);
-        }
+        //    // get the image attributes for this template and fill them in
+        //    var tileImageAttributes = tileXml.getElementsByTagName("image");
+        //    tileImageAttributes[0].setAttribute("src", tile.srcWide);
+        //    tileImageAttributes[1].setAttribute("src", tile.srcSmall);
+        //}
 
         // fill in a version of the square template returned by GetTemplateContent
         var squareTileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileSquareImage);

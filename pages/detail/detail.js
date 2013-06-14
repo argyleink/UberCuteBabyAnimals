@@ -141,8 +141,9 @@
                 like.addEventListener('click', this.like.bind(this));
             }
             else {
-                like.winControl.label = 'Login from Options in the app Settings to Like';
-                like.disabled = true;
+                like.addEventListener('click', function (e) {
+                    facebookPrompt.winControl.show(e.target);
+                });
             }
         },
 
