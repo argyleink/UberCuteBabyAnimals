@@ -14,7 +14,7 @@
             item = options.item || options.group;
             var group = item.categories && item.categories[0].slug || item.slug;
             this._data = Data.getItemsFromGroup(group).dataSource;
-
+            if (!item.id) item = this._data.itemFromIndex(0)._value.data;
             this.updateLayout();
 
             CategoryHeader.create(filter_list, group, true);
