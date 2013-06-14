@@ -3,6 +3,10 @@
     background-color:black;/*hsl(213, 92%, 85%)*/
 }
 
+.itemdetailpage {
+    -ms-grid-rows:1fr;
+}
+
 .flip-container {
     overflow-y:auto;
     overflow-x:hidden;

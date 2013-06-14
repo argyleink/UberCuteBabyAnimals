@@ -36,7 +36,8 @@
             flipview.currentPage = idx;
             flipview.onpagecompleted = function (e) {
                 var curItem = detail_flipview.winControl.itemDataSource.itemFromIndex(detail_flipview.winControl.currentPage)._value.data;
-                
+                item = curItem;
+
                 if (curItem.new) {
                     Storage.viewImage(curItem.id);
                     curItem.new = false;
@@ -67,10 +68,10 @@
                 console.log('snapped');
             }
             else if (viewState === appViewState.fullScreenPortrait) {
-                flipview.orientation = 'vertical';
+                //flipview.orientation = 'vertical';
             }
             else if (viewState === appViewState.fullScreenLandscape) {
-                flipview.orientation = 'horizontal';
+                //flipview.orientation = 'horizontal';
             }
         },
 
@@ -84,8 +85,8 @@
             appheight = window.innerHeight;
             appwidth = window.innerWidth;
 
-            detail_flipview.style.height = appheight + 'px';
-            detail_flipview.style.width = appwidth + 'px';
+            //detail_flipview.style.height = appheight + 'px';
+            //detail_flipview.style.width = appwidth + 'px';
         },
 
         renderer: function (itemPromise) {

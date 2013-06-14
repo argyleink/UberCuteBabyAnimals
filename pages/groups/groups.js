@@ -242,27 +242,28 @@
         },
 
         sezoRenderer: function(itemPromise) {
-            return itemPromise.then(function (item) {
-                var section = document.createElement('section')
-                  , figure = document.createElement('figure')
-                  , title = document.createElement('h1')
-                  , count = document.createElement('h2');
+            var section = document.createElement('section')
+              , figure = document.createElement('figure')
+              , title = document.createElement('h1')
+              , count = document.createElement('h2');
 
-                section.className = 'sezo-item';
-                section.style.height = (appheight + 60) + 'px';
-                section.style.width = ((appheight + 60) / 2) + 'px';
-                
-                figure.style.backgroundImage = 'url('+ item.data.image + ')';
+            section.className = 'sezo-item';
+            section.style.height = (appheight + 60) + 'px';
+            section.style.width = ((appheight + 60) / 2) + 'px';
 
-                title.textContent = item.data.title;
-                count.textContent = item.data.post_count;
+            section.appendChild(figure);
+            section.appendChild(title);
+            section.appendChild(count);
 
-                section.appendChild(figure);
-                section.appendChild(title);
-                section.appendChild(count);
+            return {
+                element: section,
+                renderComplete: itemPromise.then(function (item) {
+                    figure.style.backgroundImage = 'url(' + item.data.image + ')';
 
-                return section;
-            });
+                    title.textContent = item.data.title;
+                    count.textContent = item.data.post_count;
+                }),
+            };
         },
 
         snapRenderer: function(itemPromise) {
@@ -291,8 +292,13 @@
             }
             else if (args.detail.itemPromise._value.data.box) {
                 Storage.session.home.index = args.detail.itemIndex;
-
-                if (args.detail.itemPromise._value.data.count > 0 || Data.getCategory(args.detail.itemPromise._value.data.categories[0].slug).newCount) {
+                if (args.detail.itemPromise._value.data.title === 'New') {
+                    nav.navigate("/pages/collection/collection.html", {
+                        groupData: args.detail.itemPromise._value.data.categories[0],
+                        group: 'New'
+                    });
+                }
+                else if (args.detail.itemPromise._value.data.count > 0 || Data.getCategory(args.detail.itemPromise._value.data.categories[0].slug).newCount) {
                     nav.navigate("/pages/collection/collection.html", {
                         groupData: args.detail.itemPromise._value.data.categories[0]
                     });
