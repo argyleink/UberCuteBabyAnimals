@@ -5,17 +5,15 @@
       , babyList = new WinJS.Binding.List()
       , babyGroupedList
       , homeGroupedList
+      , itemCount = 0
       , categories = []
+      , newTotal = 0
       , liveTileService = App.LiveTile
       , liveTileContent = []
       , rawData
       , rawJSON
       , readyComplete
       , readyError;
-
-    // if we have cache, init list with cache
-
-    // else create new list
 
     // group function
     function groupKeySelector(item) {
@@ -88,8 +86,6 @@
     homeGroupedList = homeList.createGrouped(groupKeySelector, groupDataSelector, sortGroupAscending);
 
     function dataRecieved(data) {
-        var itemCount = 0;
-
         rawData = data.response;
         rawJSON = JSON.parse(data.response);
 
@@ -111,8 +107,10 @@
             Storage.exists(item.id).done(function(result) {
                 if (result == false) {
                     item.new = true;
+                    newTotal++;
                     getCategory(item.categories[0].slug).newCount += 1;
                 }
+                itemComplete();
             });
 
             // make 5 live tiles
@@ -127,11 +125,20 @@
             itemCount++;
         });
 
-        updateLiveTiles();
+        //updateLiveTiles();
 
         //console.info('data loaded');
-        createHomeHubsList();
+        //createHomeHubsList();
         //Storage.updateFeed(rawJSON);
+    }
+
+    var itemsCompleted = 0;
+    function itemComplete() {
+        itemsCompleted++;
+        if (itemsCompleted >= itemCount) {
+            updateLiveTiles();
+            createHomeHubsList();
+        }
     }
 
     function ready() {
@@ -304,6 +311,10 @@
         return babyList.indexOf(item) > 0 ? true : false;
     }
 
+    function getNewTotal() {
+        return newTotal;
+    }
+
     function categoryContains(item) {
         var i = categories.length;
         while (i--)
@@ -355,6 +366,7 @@
         items:                  babyGroupedList,
         homeList:               homeGroupedList,
         categories:             getCategories,
+        newTotal:               getNewTotal,
         getCategory:            getCategory,
         getItemReference:       getItemReference,
         getItemsFromGroup:      getItemsFromGroup,

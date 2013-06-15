@@ -23,6 +23,8 @@ App.LiveTile = function () {
             LiveTile.appendLiveTile(tiles[i]);
         }
 
+        if (Data.newTotal() != 0) LiveTile.appendCountTile();
+
         LiveTile.appendLiveTile({
             text: "",
             srcWide: "/assets/images/wide-logo.png",
@@ -38,6 +40,29 @@ App.LiveTile = function () {
 
     LiveTile.clear = function () {
         Notifications.TileUpdateManager.createTileUpdaterForApplication().clear();
+    }
+
+    LiveTile.appendCountTile = function () {
+        var tileXml = Notifications.TileUpdateManager.getTemplateContent(Notifications.TileTemplateType.tileWideBlockAndText02);
+
+        // get the text attributes for this template and fill them in
+        var tileTextAttributes = tileXml.getElementsByTagName("text");
+        tileTextAttributes[0].appendChild(tileXml.createTextNode("There are cute baby animals awaiting your smiles."));
+        if (Data.newTotal() > 99) {
+            tileTextAttributes[1].appendChild(tileXml.createTextNode("99"));
+            tileTextAttributes[2].appendChild(tileXml.createTextNode("and more unseen"));
+        }
+        else {
+            tileTextAttributes[1].appendChild(tileXml.createTextNode(Data.newTotal()));
+            tileTextAttributes[2].appendChild(tileXml.createTextNode("Unseen"));
+        }
+        
+
+        // create the notification from the XML
+        var tileNotification = new Notifications.TileNotification(tileXml);
+
+        // send the notification to the app's application tile
+        Notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNotification);
     }
 
     LiveTile.appendLiveTile = function (tile) {

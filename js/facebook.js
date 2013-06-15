@@ -12,11 +12,6 @@
             },
             set: function (val) {
                 this.isConnected = val;
-
-                if (val)
-                    WinJS.Utilities.addClass(document.body, 'fb-connected');
-                else
-                    WinJS.Utilities.removeClass(document.body, 'fb-connected');
             }
         },
 
