@@ -130,11 +130,15 @@
             });
         },
 
+        makeSiteUrl: function(item) {
+            return 'http://www.argyleink.com/babyanimals/' + item.slug;
+        },
+
         initAppbar: function() {
             link.onclick = function () {
-                var uri = new Windows.Foundation.Uri('http://www.argyleink.com/babyanimals/' + item.slug);
+                var uri = new Windows.Foundation.Uri(this.makeSiteUrl(item));
                 Windows.System.Launcher.launchUriAsync(uri);
-            }
+            }.bind(this);
         },
 
         initLike: function () {
@@ -143,14 +147,17 @@
             }
             else {
                 like.addEventListener('click', function (e) {
-                    facebookPrompt.winControl.show(e.target);
-                });
+                    if (Facebook.isConnected == true)
+                        this.like();
+                    else
+                        facebookPrompt.winControl.show(e.target);
+                }.bind(this));
             }
         },
 
         like: function(e) {
             if (like.winControl.label == 'Like') {
-                Facebook.like(item).then(
+                Facebook.like(item, this.makeSiteUrl(item)).then(
                     this.likeCompleted.bind(this),
                     this.likeFailed.bind(this)
                 );

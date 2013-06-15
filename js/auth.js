@@ -32,6 +32,8 @@
                         textContent: "Time to share some cute."
                     });
 
+                    Facebook.connected = true;
+
                     var responseObj = parseResponse(result);
                     oAuth.accessToken = responseObj.access_token;
                     if (oAuth.accessToken) {
@@ -39,7 +41,6 @@
                             oAuth.accessToken = response.access_token;
                             writeText(oAuth.accessToken);
                         });
-                        setUserData();
                     }
                 }
                 authzInProgress = false;
@@ -107,31 +108,16 @@
 
     function authenticate() {
         getToken().then(function success() {
-            //authenticated
-
             Facebook.connected = true;
-            setUserData();
         }, function error(e) {
             launchFacebookWebAuth();
-        });
-
-        //addSettingsFlyout();
-    }
-
-    function setUserData() {
-        Facebook.getUserData().then(function (data) {
-            debug && console.log('data exists!');
-            Facebook.user = JSON.parse(data.responseText);;
-        }, function (error) {
-            Facebook.user = null;
-            debug && console.log('getUserDataFailed: ' + error);
         });
     }
 
     function writeText(text) {
         if (tokenFile !== null) {
             Windows.Storage.FileIO.writeTextAsync(tokenFile, text).done(function () {
-                //success!
+                console.log('write success!');
             },
             function (error) {
                 WinJS.log && WinJS.log(error, "sample", "error");
@@ -161,20 +147,14 @@
     function logOut() {
         debug && console.log('logged out');
         oAuth.accessToken = null;
-        Facebook.user = null;
-        //addSettingsFlyout();
         localFolder.createFileAsync("token.ubercutedata", Windows.Storage.CreationCollisionOption.replaceExisting);
+        Facebook.connected = false;
 
         YeahToast.show({
             imgsrc: "/images/facebook-icon.png",
             title: "Logged Out",
             textContent: "See ya later"
         });
-    }
-
-    function addSettingsFlyout() {
-        var settingsPane = Windows.UI.ApplicationSettings.SettingsPane.getForCurrentView();
-        settingsPane.addEventListener("commandsrequested", onCommandsRequested);
     }
 
     function onLogIn() {
@@ -185,24 +165,13 @@
         logOut();
     }
 
-    function onCommandsRequested(eventArgs) {
-        if (oAuth.accessToken) {
-            var settingsCommand = new Windows.UI.ApplicationSettings.SettingsCommand("logout", "Log out of Facebook", onLogout);
-        } else {
-            var settingsCommand = new Windows.UI.ApplicationSettings.SettingsCommand("login", "Connect Facebook", onLogIn);
-        }
-
-        eventArgs.request.applicationCommands.append(settingsCommand);
-    }
-
     function initialize() {
         getToken().done(function () {
-            //addSettingsFlyout();
-            setUserData();
+            debug && console.log('token exists');
+            Facebook.connected = true;
         },
         function () {
-            //addSettingsFlyout();
-
+            Facebook.connected = false;
             Storage.exists('facebook_prompts').done(function (result) {
                 if (result == false) {
                     Storage.add({
