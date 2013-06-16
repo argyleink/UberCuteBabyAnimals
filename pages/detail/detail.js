@@ -197,6 +197,7 @@
                     title: "DOH...",
                     textContent: "Try again, connection to Facebook was wonky."
                 });
+                console.error('Error liking item');
             }
         }
 

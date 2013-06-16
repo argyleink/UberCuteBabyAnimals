@@ -124,20 +124,19 @@
 
             itemCount++;
         });
+    }
 
-        //updateLiveTiles();
-
-        //console.info('data loaded');
-        //createHomeHubsList();
-        //Storage.updateFeed(rawJSON);
+    function dataCompleted() {
+        updateLiveTiles();
+        createHomeHubsList();
     }
 
     var itemsCompleted = 0;
     function itemComplete() {
         itemsCompleted++;
+
         if (itemsCompleted >= itemCount) {
-            updateLiveTiles();
-            createHomeHubsList();
+            dataCompleted();
         }
     }
 

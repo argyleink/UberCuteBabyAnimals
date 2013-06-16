@@ -292,7 +292,7 @@
             }
             else if (args.detail.itemPromise._value.data.box) {
                 Storage.session.home.index = args.detail.itemIndex;
-                if (args.detail.itemPromise._value.data.title === 'New') {
+                if (args.detail.itemPromise._value.data.title === 'New' && Data.getCategory(args.detail.itemPromise._value.data.categories[0].slug).newCount > 0) {
                     nav.navigate("/pages/collection/collection.html", {
                         groupData: args.detail.itemPromise._value.data.categories[0],
                         group: 'New'
