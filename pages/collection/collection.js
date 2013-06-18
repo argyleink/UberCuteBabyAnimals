@@ -5,13 +5,14 @@
       , ui = WinJS.UI
       , appheight = window.innerHeight - 220
       , pageList
+      , listView
       , sorted = false;
 
     ui.Pages.define("/pages/collection/collection.html", {
         _items: null,
 
         ready: function (element, options) {
-            var listView = collection_list.winControl;
+            listView = collection_list.winControl;
             var group = options.groupData.slug;
 
             this._items = Data.getItemsFromGroup(group);
@@ -32,7 +33,7 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
-            this.setAppSize();
+            this._initializeLayout(listView, viewState);
         },
 
         unload: function () {

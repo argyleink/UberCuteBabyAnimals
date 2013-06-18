@@ -38,7 +38,7 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
-            this.setAppSize();
+            this._initializeLayout(listView, viewState);
         },
 
         _initializeLayout: function (listView, viewState) {

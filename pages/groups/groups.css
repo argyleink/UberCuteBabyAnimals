@@ -260,6 +260,11 @@ figure {
         background-size:cover;
         background-position:center center;
     }
+    .group-tile h1 {
+        font-size:8rem;
+        padding:0 1rem;
+        box-sizing:border-box;
+    }
 }
 
 @media (min-width:1400px) {

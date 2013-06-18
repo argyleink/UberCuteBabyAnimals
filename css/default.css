@@ -26,7 +26,7 @@ body {
 
 #appstatus {
     position:fixed;
-    top:115px;
+    top:112px;
     left:0;
 }
 
@@ -130,6 +130,10 @@ section[role=main] {
 .pagetitle {
     color:hsl(213, 70%, 70%);
     text-transform:capitalize;
+}
+
+.search .pagetitle {
+    font-size:3rem;
 }
 
     .pagetitle > img {
@@ -250,6 +254,7 @@ progress.win-ring {
 
 progress:indeterminate {
     color:hsl(212, 88%, 90%); 
+    height:0.5rem;
 }
 
 .win-flipview .win-navbutton {
