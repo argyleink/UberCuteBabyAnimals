@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="26480ArgyleInk.UberCuteBabyAnimals" Version="1.0.0.2" Publisher="CN=BA4B90AD-9CD5-454E-BF29-4CD6DF673F49" />
+  <Identity Name="26480ArgyleInk.UberCuteBabyAnimals" Version="1.0.0.0" Publisher="CN=BA4B90AD-9CD5-454E-BF29-4CD6DF673F49" />
   <Properties>
     <DisplayName>Uber Cute Baby Animals</DisplayName>
     <PublisherDisplayName>Argyle Ink</PublisherDisplayName>
