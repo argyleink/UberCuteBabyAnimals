@@ -23,7 +23,6 @@
             Data.ready.then(function () {
                 this._items = Data.getItemsFromQuery(query);
                 pageList = this._items;
-                this.initList();
             }.bind(this));
 
             // set title
@@ -39,23 +38,7 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
-            var listView = element.querySelector(".itemslist").winControl;
-            appheight = window.innerHeight;
-
-            if (lastViewState !== viewState) {
-                if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                    var handler = function (e) {
-                        listView.removeEventListener("contentanimating", handler, false);
-                        e.preventDefault();
-                    }
-                    listView.addEventListener("contentanimating", handler, false);
-                    var firstVisible = listView.indexOfFirstVisible;
-                    this._initializeLayout(listView, viewState);
-                    if (firstVisible >= 0 && listView.itemDataSource.list.length > 0) {
-                        listView.indexOfFirstVisible = firstVisible;
-                    }
-                }
-            }
+            this.setAppSize();
         },
 
         _initializeLayout: function (listView, viewState) {
@@ -64,13 +47,27 @@
             } else {
                 listView.layout = new ui.GridLayout({ groupHeaderPosition: "left" });
             }
+            this.setAppSize();
+
+            listView.itemDataSource = pageList.dataSource;
+            listView.itemTemplate = this.itemRenderer;
+            listView.oniteminvoked = this._itemInvoked.bind(this);
         },
 
         _itemInvoked: function (args) {
-            var item = this._items.getAt(args.detail.itemIndex);
-            item = Data.resolveItemReference(item);
-            var index = Data.getItemIndex(item);
-            WinJS.Navigation.navigate("/pages/detail/detail.html", { item: item, index: index });
+            var item = pageList.getAt(args.detail.itemIndex);
+
+            WinJS.Navigation.navigate("/pages/detail/detail.html", {
+                item: item,
+                index: item.catIndex - 1
+            });
+        },
+
+        setAppSize: function () {
+            if (Windows.UI.ViewManagement.ApplicationView.value === appViewState.fullScreenPortrait)
+                appheight = window.innerHeight / 2 - 120;
+            else
+                appheight = window.innerHeight - 210;
         },
 
         itemRenderer: function (itemPromise) {
@@ -85,7 +82,7 @@
                     figure.classList.remove('loading');
                 });
 
-                figure.className = 'collection-tile loading';
+                figure.className = item.data.new ? 'collection-tile new loading' : 'collection-tile loading';
                 figure.style.height = (appheight / 2) + 'px';
                 figure.style.width = (appheight / 2) + 'px';
 
@@ -93,18 +90,6 @@
 
                 return div;
             });
-        },
-
-        initList: function () {
-
-
-            listView.itemDataSource = pageList.dataSource;
-            listView.itemTemplate = this.itemRenderer;
-            listView.oniteminvoked = this._itemInvoked.bind(this);
-        },
-
-        keyPressed: function (e) {
-            console.log(e);
         }
 
     });
