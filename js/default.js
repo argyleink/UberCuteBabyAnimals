@@ -45,11 +45,11 @@
 
         // Register settings flyouts
         e.detail.applicationcommands = {
-            "Options": {
-                href: "/pages/settings/options/index.html",
-                title: "Options"
-            }
-            , "About": {
+            //"Options": {
+            //    href: "/pages/settings/options/index.html",
+            //    title: "Options"
+            //}
+            "About": {
                 href: "/pages/settings/about/index.html",
                 title: "About"
             }

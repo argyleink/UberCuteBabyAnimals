@@ -20,7 +20,7 @@
             CategoryHeader.create(filter_list, group, true);
 
             this.initFlipview(options.index || 0);
-            this.initLike();
+            //this.initLike();
             this.initAppbar();
             this.setBodyClass();
 
