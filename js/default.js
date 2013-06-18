@@ -70,6 +70,6 @@
         var settingsPane = Windows.UI.ApplicationSettings.SettingsPane.getForCurrentView();
     }
 
-    oAuth.initialize();
+    //oAuth.initialize();
     app.start();
 })();
