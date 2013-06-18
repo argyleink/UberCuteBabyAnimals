@@ -248,8 +248,14 @@
               , count = document.createElement('h2');
 
             section.className = 'sezo-item';
-            section.style.height = (appheight + 60) + 'px';
-            section.style.width = ((appheight + 60) / 2) + 'px';
+            if (appView.value === appViewState.fullScreenPortrait) {
+                section.style.height = (appheight + 140) + 'px';
+                section.style.width = ((appheight + 140) / 2) + 'px';
+            }
+            else {
+                section.style.height = (appheight + 60) + 'px';
+                section.style.width = ((appheight + 60) / 2) + 'px';
+            }
 
             section.appendChild(figure);
             section.appendChild(title);

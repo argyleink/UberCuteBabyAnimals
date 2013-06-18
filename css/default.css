@@ -97,12 +97,6 @@ section[role=main] {
             margin-top: 46px;
         }
 
-        .group .fragment header[role=banner] .win-backbutton {
-            position:absolute;
-            z-index:101;
-            margin-top:20px;
-        }
-
         
 .win-backbutton.top-bar {
     margin:3em 4em 0 2em;
@@ -362,6 +356,13 @@ input[type=range]:disabled::-ms-fill-lower {
             -ms-grid-column: 2;
             margin-left: 0;
             margin-top: 68px;
+        }
+        
+
+        .group .fragment header[role=banner] .win-backbutton {
+            position:absolute;
+            z-index:101;
+            margin-top:20px;
         }
 }
 
